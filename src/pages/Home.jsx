@@ -1,25 +1,25 @@
 import React from 'react'
-import logo from '../logo.svg';
+import Navbar from '../components/Navbar'
+import Button from '../components/Button'
 
 const Home = () => {
-	//  Template Code
 	return (
 		<>
-			<div className='relative bg z-0' >
-				<section className='flex-col Nunito relative z-10 h-screen w-screen overflow-hidden flex items-center justify-center'>
-					<h1 className='text-4xl text-white font-bold -mt-20 mb-20 w-[50vw] text-center'>A complete boilerplate for your next tailwind and React project!</h1>
-					<div className='flex'>
-						<div className='w-[30vw] items-center justify-center flex flex-col'>
-							<img src={logo} className="h-[20vh]" alt="" />
-							<h2 className='text-2xl font-bold text-white text-center'>ReactJs</h2>
-						</div>
-						<div className='w-[30vw] items-center justify-center flex flex-col'>
-							<img className="h-[20vh]" src="https://camo.githubusercontent.com/bcd4bda49ef6cd9537db065920f4f4f6ac670eae0e0adf2c5133c19b319f1574/68747470733a2f2f627261646c632e67616c6c65727963646e2e76736173736574732e696f2f657874656e73696f6e732f627261646c632f7673636f64652d7461696c77696e646373732f302e322e302f313535383034303536333634392f4d6963726f736f66742e56697375616c53747564696f2e53657276696365732e49636f6e732e44656661756c74" alt="" />
-							<h2 className='text-2xl font-bold text-white text-center'>TailwindCSS</h2>
-						</div>
+			<img src="/assets/BG/bg-shape-1.png" className='absolute top-0 left-[-2px]' alt="" />
+			<img src="/assets/BG/bg-shape-2.png" className='absolute top-[226px] left-[179px]' alt="" />
+			<section className='h-screen w-screen relative Poppins flex flex-col border-b-2'>
+				<Navbar />
+				<div className='custom-height w-screen top-[90px] left-0 absolute flex justify-between px-24'>
+					<div className='h-full w-1/2 flex justify-center flex-col pl-8'>
+						<h1 className='text-6xl font-semibold'><span className='font-extralight'>The largest & trusted</span> Courier Delivery<br/>Service.</h1>
+						<p className='mt-8 text-lg'>We deliver your products safely to your <br /> home in a reasonable time and safely.</p>
+						<Button text={"Create a Order"} className={"w-48 py-3 mt-10"}/>
 					</div>
-				</section>
-			</div>
+					<div className='h-full w-1/2 flex items-center'>
+						<img src="/assets/hero-img.png" alt="" />
+					</div>
+				</div>
+			</section>
 		</>
 	)
 }
