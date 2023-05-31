@@ -50,6 +50,9 @@ body {
 
 .rectangle-bg {
   background: linear-gradient(0deg, #F2F3D4, #F2F3D4),
-  radial-gradient(50.08% 50.08% at 50% 50.08%, #FFF5C8 0%, #FEFFED 100%);
-  
+    radial-gradient(50.08% 50.08% at 50% 50.08%, #FFF5C8 0%, #FEFFED 100%);
+}
+
+.brands-gradient {
+  background: radial-gradient(50.08% 50.08% at 50% 50.08%, #FFF5C8 0%, #FEFFED 100%);
 }
