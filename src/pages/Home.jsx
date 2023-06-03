@@ -8,6 +8,8 @@ const Home = () => {
 		<>
 			<img src="/assets/BG/bg-shape-1.png" className='absolute top-0 left-[-2px]' alt="" />
 			<img src="/assets/BG/bg-shape-2.png" className='absolute top-[226px] left-[179px]' alt="" />
+
+			{/* section-1 */}
 			<section className='h-screen w-screen relative Poppins flex flex-col border-b-2'>
 				<Navbar />
 				<div className='custom-height w-screen top-[90px] left-0 absolute flex md:flex-row flex-col-reverse justify-between px-5 md:px-16 lg:px-24'>
@@ -21,10 +23,12 @@ const Home = () => {
 					</div>
 				</div>
 			</section>
+
+			{/* We know how assist with any kind of business. Section-2 */}
 			<section className='h-auto w-screen relative Poppins flex flex-col border-b-2 px-5 md:px-28'>
 				<img src="/assets/BG/bg-shape-3.png" className='absolute bottom-4 left-0 hidden md:block w-[80%] h-[100%] z-0' alt="" />
 				<img src="/assets/BG/bg-shape-4.png" className='absolute top-16 right-16 h-[200px] aspect-square md:h-[27%] md:w-[14%] z-0' alt="" />
-				<h1 className='z-50 text-3xl md:text-5xl leading-tight pt-9 font-medium'>We know how assist with <br className='md:block hidden'/> any kind of business.</h1>
+				<h1 className='z-50 text-3xl md:text-5xl leading-tight pt-9 font-medium'>We know how assist with <br className='md:block hidden' /> any kind of business.</h1>
 				<div className='grid grid-cols-2 md:grid-cols-4 gap-x-5 md:gap-x-20 gap-y-11 z-50 p-0 py-5 md:p-5 md:pb-11'>
 					<div className='flex flex-col items-center'>
 						<div className='bg-white rounded-xl p-[20px] w-full h-full flex justify-center items-center'>
@@ -76,13 +80,15 @@ const Home = () => {
 					</div>
 				</div>
 			</section>
-			<section className='h-screen w-screen relative Poppins flex flex-col border-b-2 px-28 py-10'>
+
+			{/* Calculate the Fare section-3 */}
+			<section className=' w-screen relative Poppins flex flex-col border-b-2 px-28 py-10 '>
 				<img src="/assets/BG/bg-shape-5.png" className='absolute left-[33%] top-5 z-0' alt="" />
 				<h1 className='text-5xl font-medium'>Calculate the Fare</h1>
 				<p className='text-lg pt-2'>No extra cost for urgent delivery</p>
 				<div className='flex w-full h-full items-center'>
-					<div className='w-1/2 h-full relative'>
-						<img className='absolute right-28 top-16' src="/assets/section3.png" alt="" />
+					<div className='w-1/2 h-full flex items-center justify-center'>
+						<img className='h-[28rem]' src="/assets/section3.png" alt="" />
 					</div>
 					<div className='w-1/2 h-auto flex justify-center items-center z-50'>
 						<div className='bg-white z-50 border-2 w-[90%] custom-shadow rounded-3xl p-12'>
@@ -101,6 +107,8 @@ const Home = () => {
 					</div>
 				</div>
 			</section>
+
+			{/* Send your parcel Hassel-free!! section-4 */}
 			<section className='h-screen w-screen relative Poppins flex flex-col border-b-2 px-28 py-9'>
 				<img src="/assets/BG/bg-shape-6.png" className='absolute left-0 bottom-[63%] z-0' alt="" />
 				<div className='bg-[gradient-bg] w-full h-full'>
@@ -111,6 +119,8 @@ const Home = () => {
 					</ul>
 				</div>
 			</section>
+
+			{/* Bulk Order section-5 */}
 			<section className='h-auto w-screen relative Poppins flex flex-col border-b-2 px-5 md:px-28 py-9 pb-12'>
 				<img src="/assets/BG/bg-shape-7.png" className='absolute right-80 bottom-96 z-0' alt="" />
 				<h1 className='text-3xl md:text-5xl pb-4 font-medium'>Bulk Order</h1>
@@ -135,10 +145,12 @@ const Home = () => {
 						<p className='text-base'>Give us a call, We are just a call away!!</p>
 					</div>
 					<div className='flex justify-center items-center'>
-						<Button text={"Give a call"} className={"mt-3  text-accentYellow bg-white"} />
+						<Button text={"Give a call"} className={"mt-3 text-accentYellow bg-white"} />
 					</div>
 				</div>
 			</section>
+
+			{/* Brands section-6 */}
 			<section className='h-auto w-screen relative Poppins flex flex-col border-b-2 px-28 py-12'>
 				<img src="/assets/BG/bg-shape-8.png" className='absolute right-0 top-[60%] z-0 ' alt="" />
 				<div className='brands-gradient border-[#F2F3D4] border-4 rounded-3xl p-12 px-24 flex flex-col items-center z-50'>
@@ -165,10 +177,55 @@ const Home = () => {
 					</div>
 				</div>
 			</section>
-			<section className='h-auto w-screen relative Poppins flex flex-col border-b-2 px-28 py-12'>
 
+			{/* Become a courier section-7 */}
+			<section className='h-auto w-screen relative Poppins flex flex-col border-b-2 px-28 py-12 pt-32'>
+				<img src="/assets/BG/bg-shape-10.png" className='absolute left-0 top-0 z-0 h-72' alt="" />
+				<div className='md:flex justify-around hidden w-full bg-accentYellow z-50 rounded-3xl px-6 py-12 relative'>
+					<div className='w-1/4 absolute bottom-0 left-16'>
+						<img src="/assets/section7.png" alt="" />
+					</div>
+					<div className='w-2/4 flex flex-col justify-center text-white'>
+						<h1 className='text-3xl font-medium pb-2'>Become a courier</h1>
+						<ul className='text-lg  list-disc	'>
+							<li className='py-1'>Deliver with us, and we'll pay you right away!</li>
+							<li className='py-1'>Register in 10 minutes with the Rider App.</li>
+						</ul>
+					</div>
+					<div className='w-1/4 relative flex flex-col h-full items-center'>
+						<div className='z-50 absolute bottom-0 left-10'>
+							<img className='' src="/assets/qrcode.png" alt="" />
+						</div>
+						<Button text={"Register Now"} className={"text-accentYellow bg-white"} />
+					</div>
+				</div>
 			</section>
-			<Footer/>
+
+			{/* Contact Us section-8 */}
+			<section className='h-auto w-screen relative Poppins flex flex-col border-b-2 px-28 py-12'>
+				<h1 className='text-3xl md:text-5xl pb-4 font-medium'>Contact Us</h1>
+				<div className='w-full h-full flex py-7'>
+					<div className='w-1/2 px-20 flex flex-col h-full'>
+						<div className='w-full'>
+							<img src="/assets/section8.png" alt="" />
+						</div>
+						<div className='w-full'>
+							<h1 className='text-3xl font-medium pb-2 text-accentYellow'>REQUEST A CALLBACK</h1>
+							<h2 className='text-3xl font-medium pb-2'>We will contact in the shortest time.</h2>
+							<h3 className='text-3xl font-medium pb-2 text-gray-400' >Monday to Friday, 9am-5pm.	</h3>
+						</div>
+					</div>
+					<div className='w-1/2 h-full flex flex-col justify-center px-20'>
+						<h1 className='text-xl font-medium pb-2'>Fill in the Details below :</h1>
+						<input className='my-2 outline-none border-2 rounded-lg focus:border-accentYellow px-3 py-2 text-base' type="text" name="" id="" placeholder='Name' />
+						<input className='my-2 outline-none border-2 rounded-lg focus:border-accentYellow px-3 py-2 text-base' type="text" name="" id="" placeholder='Email' />
+						<textarea className='my-2 mb-12 h-44 outline-none resize-none border-2 rounded-lg focus:border-accentYellow px-3 py-2' type="text" name="" id="" placeholder='Message (upto 200 words)'></textarea>
+						<Button text={"Send message"}/>	
+					</div>
+				</div>
+			</section>
+
+			<Footer />
 		</>
 	)
 }
