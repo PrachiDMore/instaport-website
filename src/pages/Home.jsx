@@ -28,10 +28,10 @@ const Home = () => {
 			<section className='h-auto w-screen relative Poppins flex flex-col border-b-2 px-5 md:px-28'>
 				<img src="/assets/BG/bg-shape-3.png" className='absolute bottom-4 left-0 hidden md:block w-[80%] h-[100%] z-0' alt="" />
 				<img src="/assets/BG/bg-shape-4.png" className='absolute top-16 right-16 h-[200px] aspect-square md:h-[27%] md:w-[14%] z-0' alt="" />
-				<h1 className='z-50 text-3xl md:text-5xl leading-tight pt-9 font-medium'>We know how assist with <br className='md:block hidden' /> any kind of business.</h1>
+				<h1 className='z-50 text-3xl md:text-5xl leading-tight pt-9 font-semibold mb-3'>We know how assist with <br className='md:block hidden' /> any kind of business.</h1>
 				<div className='grid grid-cols-2 md:grid-cols-4 gap-x-5 md:gap-x-20 gap-y-11 z-50 p-0 py-5 md:p-5 md:pb-11'>
 					<div className='flex flex-col items-center'>
-						<div className='bg-white rounded-xl p-[20px] w-full h-full flex justify-center items-center'>
+						<div className='shadow-md duration-200 cursor-pointer hover:shadow-xl bg-white rounded-xl p-[20px] w-full h-full flex justify-center items-center'>
 							<img className='h-[100px] aspect-square md:h-[60%]' src="/assets/box1.png" alt="" />
 						</div>
 						<p className='text-base md:text-lg pt-2 font-medium'>E-Commerce</p>
@@ -124,7 +124,7 @@ const Home = () => {
 			<section className='h-auto w-screen relative Poppins flex flex-col border-b-2 px-5 md:px-28 py-9 pb-12'>
 				<img src="/assets/BG/bg-shape-7.png" className='absolute right-80 bottom-96 z-0' alt="" />
 				<h1 className='text-3xl md:text-5xl pb-4 font-medium'>Bulk Order</h1>
-				<div className='md:flex hidden bg-accentYellow z-50 rounded-3xl px-6 py-12 relative'>
+				<div className='shadow-xl md:flex hidden bg-accentYellow z-50 rounded-3xl px-6 py-12 relative'>
 					<div className='w-[25%] border-r-2 flex justify-center items-center'>
 						<Button text={"Give a call"} className={" text-accentYellow bg-white"} />
 					</div>
@@ -179,24 +179,24 @@ const Home = () => {
 			</section>
 
 			{/* Become a courier section-7 */}
-			<section className='h-auto w-screen relative Poppins flex flex-col border-b-2 px-28 py-12 pt-32'>
+			<section className='h-auto w-screen relative Poppins flex flex-col border-b-2 px-28 py-12 pt-20'>
 				<img src="/assets/BG/bg-shape-10.png" className='absolute left-0 top-0 z-0 h-72' alt="" />
-				<div className='md:flex justify-around hidden w-full bg-accentYellow z-50 rounded-3xl px-6 py-12 relative'>
-					<div className='w-1/4 absolute bottom-0 left-16'>
+				<div className='shadow-xl h-[14rem] items-center gap-5 md:flex justify-around hidden w-full bg-accentYellow z-50 rounded-3xl px-6 relative'>
+					<div className='w-3/12 self-end'>
 						<img src="/assets/section7.png" alt="" />
 					</div>
-					<div className='w-2/4 flex flex-col justify-center text-white'>
-						<h1 className='text-3xl font-medium pb-2'>Become a courier</h1>
-						<ul className='text-lg  list-disc	'>
+					<div className='w-5/12 flex flex-col justify-center text-white'>
+						<h1 className='text-4xl font-semibold pb-2'>Become a courier</h1>
+						<ul className='pl-6 text-lg list-disc'>
 							<li className='py-1'>Deliver with us, and we'll pay you right away!</li>
 							<li className='py-1'>Register in 10 minutes with the Rider App.</li>
 						</ul>
 					</div>
-					<div className='w-1/4 relative flex flex-col h-full items-center'>
-						<div className='z-50 absolute bottom-0 left-10'>
-							<img className='' src="/assets/qrcode.png" alt="" />
+					<div className='w-4/12 relative flex self-end mb-3 h-[16rem] flex-col items-center'>
+						<div className='z-50 mb-3'>
+							<img className='shadow-lg border rounded-xl h-48' src="/assets/qrcode.png" alt="" />
 						</div>
-						<Button text={"Register Now"} className={"text-accentYellow bg-white"} />
+						<Button text={"Register Now"} className={"shadow-lg text-accentYellow bg-white font-semibold"} />
 					</div>
 				</div>
 			</section>

@@ -6,6 +6,8 @@
 
 body {
   background-color: rgba(255, 255, 235, 1);
+  user-select: none;
+  font-family: 'Poppins';
 }
 
 .Poppins {
@@ -50,4 +52,9 @@ body {
 
 .brands-gradient {
   background: radial-gradient(50.08% 50.08% at 50% 50.08%, #FFF5C8 0%, #FEFFED 100%);
+}
+
+img{
+  -webkit-user-drag: none;
+  user-select: none;
 }
