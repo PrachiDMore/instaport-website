@@ -11,6 +11,7 @@ const Navbar = () => {
 					<div className='flex gap-16'>
 						<Link to={"/"}>Home</Link>
 						<Link to={"/support"}>Support</Link>
+						<Link to={"/create-order"}>Create an Order</Link>
 					</div>
 					<div className='flex gap-10 items-center'>
 						<Link to={"/support"}>SignIn</Link>
