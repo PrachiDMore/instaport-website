@@ -2,8 +2,8 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import Button from '../components/Button'
 import Footer from '../components/Footer'
-import {GrLocation} from 'react-icons/gr'
-import {BsFillBox2Fill} from 'react-icons/bs'
+import { GrLocation } from 'react-icons/gr'
+import { BsFillBox2Fill } from 'react-icons/bs'
 
 const Home = () => {
 	return (
@@ -105,16 +105,22 @@ const Home = () => {
 						<div className='bg-white z-50 border-2 w-[90%] custom-shadow rounded-3xl p-12'>
 							<div className='flex flex-col pb-3 relative'>
 								<div className='absolute right-3 bottom-6 '>
-									<GrLocation className='text-accentYellow'/>
+									<GrLocation className='text-accentYellow' />
 								</div>
-								<label className='font-medium pb-2 text-lg relative' htmlFor=""><span className='absolute  text-accentYellow'><BsFillBox2Fill /></span> Pickup point:</label>
+								<div className='flex gap-2 items-baseline'>
+									<span className='text-accentYellow'><BsFillBox2Fill /></span>
+									<label className='font-medium pb-2 text-lg' htmlFor="">Pickup point:</label>
+								</div>
 								<input className='py-1 border-b-2 outline-none' type="text" name="" id="" placeholder='Enter pickup Point' />
 							</div>
 							<div className='flex flex-col py-3 relative'>
-							<div className='absolute right-3 bottom-6 '>
-									<GrLocation className='text-accentYellow'/>
+								<div className='absolute right-3 bottom-6 '>
+									<GrLocation className='text-accentYellow' />
 								</div>
-								<lable className='font-medium py-2 text-lg relative' htmlFor=""><div className='flex absolute  text-accentYellow'><BsFillBox2Fill /></div> <div>Dropup point:</div></lable>
+								<div className='flex gap-2 items-baseline'>
+									<div className='text-accentYellow'><BsFillBox2Fill /></div>
+									<lable className='font-medium py-2 text-lg ' htmlFor="">Dropup point:</lable>
+								</div>
 								<input className='py-1 border-b-2 outline-none' type="text" name="" id="" placeholder='Enter Drop Point' />
 							</div>
 							<div className='flex justify-center items-center pt-5'>
