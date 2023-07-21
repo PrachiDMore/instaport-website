@@ -9,7 +9,7 @@ import Button from '../components/Button'
 
 const CreateOrder = () => {
   return (
-    <section className='h-auto w-screen Poppins flex flex-col bg-[#FFFFD0]'>
+    <section className='h-auto w-screen Poppins flex flex-col bg-[#fafae0]'>
       <Navbar />
       <section className='h-auto w-screen flex flex-col items-center px-24'>
         <h1 className='text-3xl md:text-5xl pt-36 font-semibold mb-3 self-start'>Create an Order</h1>
