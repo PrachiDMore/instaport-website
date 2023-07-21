@@ -6,8 +6,12 @@ import { LuClock3 } from 'react-icons/lu'
 import Input from '../components/Input'
 import { IoIosArrowDown } from 'react-icons/io'
 import Button from '../components/Button'
+import { useEffect } from 'react'
 
 const CreateOrder = () => {
+  useEffect(() => {
+    alert("Due to integration of payment gateway \nThe online ordering is paused!")
+  }, []);
   return (
     <section className='h-auto w-screen Poppins flex flex-col bg-[#fafae0]'>
       <Navbar />
