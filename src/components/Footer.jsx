@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Footer = ({ className }) => {
   return (
@@ -34,7 +35,7 @@ const Footer = ({ className }) => {
                 {/* <li className='h-full lg:pb-5 pb-2 text-gray-400 font-medium'>For Businesses</li> */}
                 <li className='h-full lg:pb-5 pb-2 text-gray-400 font-medium'>FAQs</li>
                 <li className='h-full lg:py-5 py-2 text-gray-400 font-medium'>Pricing</li>
-                <li className='h-full lg:pt-5 pt-2 text-gray-400 font-medium'>Terms and conditions</li>
+                <Link to='/terms-and-conditions' className='h-full lg:pt-5 pt-2 text-gray-400 font-medium'>Terms and conditions</Link>
               </ul>
             </div>
             <div className='lg:w-1/4 w-full h-full flex flex-col items-center'>
