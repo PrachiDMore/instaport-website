@@ -17,7 +17,7 @@ const Navbar = ({ comingsoon = false }) => {
 							<div className='flex gap-16'>
 								<Link to={"/"}>Home</Link>
 								<Link to={"/support"}>Support</Link>
-								<Link to={"/create-order"}>Create an Order</Link>
+								<Link to={"/about-us"}>About us</Link>
 							</div>
 							<div className='flex gap-10 items-center'>
 								<Link to={"/support"}>SignIn</Link>

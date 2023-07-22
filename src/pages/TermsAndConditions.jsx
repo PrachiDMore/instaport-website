@@ -7,6 +7,7 @@ export const TermsAndConditions = () => {
     <section className='h-auto w-screen Poppins flex flex-col items-center bg-[#fafae0]'>
       <Navbar />
       <section className='w-[80%] mt-[9%] p-7 bg-white rounded-xl border-2 border-accentYellow'>
+        <h1 className='text-2xl font-semibold mb-4 text-center'>TERMS AND CONDITIONS</h1>
         <p className='pb-2'>Instaport delivery. If you continue to browse and use our app/website you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern SmartShift Logistics Solutions Private Limited's (Owner of Instaport delivery) relationship with Welcome you in relation to this app/website and the Services (as described below)</p>
         <p className='pb-2'>In the event there is a conflict between the terms and conditions specified herein and the provisions of any other document executed between the to parties hereto, the terms and conditions specified herein would prevail.</p>
         <h1 className='text-xl font-semibold mt-4 self-start'>DEFINITIONS</h1>
