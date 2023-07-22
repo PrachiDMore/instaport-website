@@ -9,17 +9,19 @@ import { Link } from 'react-router-dom'
 const Home = () => {
 	return (
 		<>
-			<img src="/assets/BG/bg-shape-1.png" className='absolute top-0 left-[-2px]' alt="" />
-			<img src="/assets/BG/bg-shape-2.png" className='absolute top-[226px] left-[179px]' alt="" />
+			<div className='w-screen overflow-x-hidden'>
+				<img src="/assets/BG/bg-shape-1.png" className='absolute top-0 left-[-2px]' alt="" />
+				<img src="/assets/BG/bg-shape-2.png" className='lg:block hidden absolute top-[226px] left-[179px]' alt="" />
+			</div>
 
 			{/* section-1 */}
-			<section className='h-screen w-screen relative Poppins flex flex-col border-b-2'>
+			<section className='h-screen w-full relative Poppins flex flex-col border-b-2'>
 				<Navbar />
 				<div className='custom-height w-screen top-[90px] left-0 absolute flex md:flex-row flex-col-reverse justify-between px-5 md:px-16 lg:px-24'>
 					<div className='h-full w-full md:w-1/2 flex justify-center flex-col md:pl-8 pl-0'>
 						<h1 className='md:text-6xl text-3xl font-semibold  md:text-left text-center'><span className='font-extralight'>The Fast & Secured</span> Courier Delivery<br />Service.</h1>
 						<p className='mt-8 text-lg md:text-left text-center'>We deliver your products safely to your <br className='md:block hidden' /> home in a reasonable time and safely.</p>
-						<Link to='/create-order'><Button text={"Create a Order"} className={"w-48 py-3 mt-10 mx-auto md:mx-0"} /></Link>
+						<Button text={"Create a Order"} className={"w-48 py-3 mt-10 mx-auto md:mx-0"} />
 					</div>
 					<div className='md:flex h-max md:h-full w-full md:w-1/2 items-center'>
 						<img src="/assets/hero-img.png" alt="" />
@@ -30,7 +32,7 @@ const Home = () => {
 
 
 			{/* Calculate the Fare section-3 */}
-			<section className=' w-screen relative Poppins hidden flex-col border-b-2 px-28 py-10 '>
+			<section className='overflow-x-hidden w-full relative Poppins hidden flex-col border-b-2 px-28 py-10 '>
 				<img src="/assets/BG/bg-shape-5.png" className='absolute left-[33%] top-5 z-0' alt="" />
 				<h1 className='text-3xl md:text-5xl font-semibold'>Calculate the Fare</h1>
 				<p className='text-lg pt-2'>No extra cost for urgent delivery</p>
@@ -69,7 +71,7 @@ const Home = () => {
 			</section>
 
 			{/* Send your parcel Hassel-free!! section-4 pending*/}
-			<section className='h-screen w-screen relative Poppins hidden flex-col border-b-2 px-28 py-9'>
+			<section className='h-screen w-full relative Poppins hidden flex-col border-b-2 px-28 py-9'>
 				<img src="/assets/BG/bg-shape-6.png" className='absolute left-0 bottom-[63%] z-0' alt="" />
 				<div className='bg-[gradient-bg] w-full h-full'>
 					<h1>Send your parcel Hassel-free!!</h1>
@@ -81,7 +83,7 @@ const Home = () => {
 			</section>
 
 			{/* Bulk Order section-5 */}
-			<section className='h-auto w-screen relative Poppins flex flex-col border-b-2 px-5 md:px-28 py-9 pb-12'>
+			<section className='h-auto w-full relative Poppins flex flex-col border-b-2 px-5 md:px-28 py-9 pb-12'>
 				<img src="/assets/BG/bg-shape-7.png" className='absolute right-80 bottom-96 z-0' alt="" />
 				<h1 className='pb-4 text-3xl md:text-5xl font-semibold'>Bulk Order</h1>
 				<div className='shadow-xl md:flex hidden bg-accentYellow z-50 rounded-3xl px-6 py-12 relative'>
@@ -115,7 +117,7 @@ const Home = () => {
 			</section>
 
 			{/* We know how assist with any kind of business. Section-2 */}
-			<section className='h-auto w-screen relative Poppins flex flex-col border-b-2 px-5 md:px-28'>
+			<section className='h-auto w-full relative Poppins flex flex-col border-b-2 px-5 md:px-28'>
 				<img src="/assets/BG/bg-shape-3.png" className='absolute bottom-4 left-0 hidden md:block w-[80%] h-[100%] z-0' alt="" />
 				<img src="/assets/BG/bg-shape-4.png" className='absolute top-16 right-16 h-[200px] aspect-square md:h-[27%] md:w-[14%] z-0' alt="" />
 				<h1 className='z-50 text-3xl md:text-5xl leading-tight pt-9 font-semibold mb-3'>We know how assist with <br className='md:block hidden' /> any kind of business.</h1>
@@ -155,7 +157,7 @@ const Home = () => {
 			</section>
 
 			{/* Brands section-6 */}
-			<section className='h-auto w-screen relative Poppins hidden flex-col border-b-2 px-28 py-12'>
+			<section className='h-auto w-full relative Poppins hidden flex-col border-b-2 px-28 py-12'>
 				<img src="/assets/BG/bg-shape-8.png" className='absolute right-0 top-[60%] z-0 ' alt="" />
 				<div className='brands-gradient border-[#F2F3D4] border-4 rounded-3xl p-12 px-24 flex flex-col items-center z-50'>
 					<h1 className='pb-4 text-3xl md:text-5xl font-semibold'>Serving the brands like</h1>
@@ -183,7 +185,7 @@ const Home = () => {
 			</section>
 
 			{/* Become a courier section-7 */}
-			<section className='h-auto w-screen relative Poppins lg:flex hidden flex-col border-b-2 px-28 py-12 pt-20'>
+			<section className='h-auto w-full relative Poppins lg:flex hidden flex-col border-b-2 px-28 py-12 pt-20'>
 				<img src="/assets/BG/bg-shape-10.png" className='absolute left-0 top-0 z-0 h-72' alt="" />
 				<div className='shadow-xl h-[14rem] items-center gap-5 md:flex justify-around flex w-full bg-accentYellow z-50 rounded-3xl px-6 relative'>
 					<div className='w-3/12 self-end'>
@@ -221,7 +223,7 @@ const Home = () => {
 			{/* Contact Us section-8 */}
 			<section className='h-auto w-full  relative Poppins flex flex-col border-b-2 lg:px-28 px-5 py-12'>
 				<img src="/assets/BG/bg-shape-9.png" className='absolute right-0 top-[63%] z-0 ' alt="" />
-				<img src="/assets/BG/bg-shape-7.png" className='absolute left-[33%] top-0 z-0 ' alt="" />
+				<img src="/assets/BG/bg-shape-7.png" className='lg:block hidden absolute left-[33%] top-0 z-0 ' alt="" />
 				<h1 className='pb-4 text-3xl md:text-5xl font-semibold'>Contact Us</h1>
 				<div className='w-full h-full flex lg:flex-row flex-col py-7 '>
 					<div className='lg:w-1/2 lg:px-20 w-full px-3 flex flex-col h-full'>

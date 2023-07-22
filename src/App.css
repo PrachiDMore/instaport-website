@@ -8,6 +8,7 @@ body {
   background-color: rgba(255, 255, 235, 1);
   user-select: none;
   font-family: 'Poppins';
+  overflow-x: hidden !important;
 }
 
 .Poppins {
