@@ -55,7 +55,29 @@ body {
   background: radial-gradient(50.08% 50.08% at 50% 50.08%, #FFF5C8 0%, #FEFFED 100%);
 }
 
-img{
+img {
   -webkit-user-drag: none;
   user-select: none;
+}
+
+.css-qbdosj-Input input {
+  padding: 0.45rem 0.75rem !important;
+}
+
+.css-1jqq78o-placeholder{
+  padding-left: 18px;
+}
+
+.css-13cymwt-control{
+  border-radius: 0.75rem !important;
+  border: 2px solid #FFD12E !important;
+}
+.css-t3ipsp-control{
+  border-radius: 0.75rem !important;
+  border: 2px solid #FFD12E !important;
+  box-shadow: none !important;
+}
+.css-13cymwt-control:focus{
+  border-radius: 0.75rem !important;
+  border: 2px solid #FFD12E !important;
 }

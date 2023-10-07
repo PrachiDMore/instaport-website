@@ -21,7 +21,9 @@ const Home = () => {
 					<div className='h-full w-full md:w-1/2 flex justify-center flex-col md:pl-8 pl-0'>
 						<h1 className='md:text-6xl text-3xl font-semibold  md:text-left text-center'><span className='font-extralight'>The Fast & Secured</span> Courier Delivery<br />Service.</h1>
 						<p className='mt-8 text-lg md:text-left text-center'>We deliver your products safely to your <br className='md:block hidden' /> home in a reasonable time and safely.</p>
-						<Button text={"Create a Order"} className={"w-48 py-3 mt-10 mx-auto md:mx-0"} />
+						<div className='w-full flex lg:justify-start justify-center'>
+							<Link to={"/create-order"}><Button text={"Create a Order"} className={"w-48 py-3 mt-10 mx-auto md:mx-0"} /></Link>
+						</div>
 					</div>
 					<div className='md:flex h-max md:h-full w-full md:w-1/2 items-center'>
 						<img src="/assets/hero-img.png" alt="" />

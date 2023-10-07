@@ -24,18 +24,18 @@ const Footer = ({ className }) => {
             </div> */}
             <div className=' lg:w-1/2 w-full h-full flex flex-col items-center'>
               <ul className='flex flex-col h-max'>
-                <li className='h-full lg:pb-5 pb-2 text-gray-400 font-medium'>Become a courier</li>
-                <Link to='/privacy-policy'className='h-full lg:py-5 py-2 text-gray-400 font-medium'>Privacy Policy</Link>
-                <Link to='/cancellation-and-refund' className='h-full lg:pt-5 pt-2 text-gray-400 font-medium'>Refund Policy</Link>
-                {/* <li className='h-full lg:pt-5 pt-2 text-gray-400 font-medium'>Community Guidelines</li> */}
+                <li className='h-full lg:pb-5 pb-2 text-gray-600 font-medium'>Become a courier</li>
+                <Link to='/privacy-policy'className='h-full lg:py-5 py-2 text-gray-600 font-medium'>Privacy Policy</Link>
+                <Link to='/cancellation-and-refund' className='h-full lg:pt-5 pt-2 text-gray-600 font-medium'>Refund Policy</Link>
+                {/* <li className='h-full lg:pt-5 pt-2 text-gray-600 font-medium'>Community Guidelines</li> */}
               </ul>
             </div>
             <div className=' lg:w-1/2 w-full h-full flex flex-col items-center'>
               <ul className='flex flex-col h-max'>
-                {/* <li className='h-full lg:pb-5 pb-2 text-gray-400 font-medium'>For Businesses</li> */}
-                <li className='h-full lg:pb-5 pb-2 text-gray-400 font-medium'>FAQs</li>
-                <li className='h-full lg:py-5 py-2 text-gray-400 font-medium'>Pricing</li>
-                <Link to='/terms-and-conditions' className='h-full lg:pt-5 pt-2 text-gray-400 font-medium'>Terms and conditions</Link>
+                {/* <li className='h-full lg:pb-5 pb-2 text-gray-600 font-medium'>For Businesses</li> */}
+                <li className='h-full lg:pb-5 pb-2 text-gray-600 font-medium'>FAQs</li>
+                <li className='h-full lg:py-5 py-2 text-gray-600 font-medium'>Pricing</li>
+                <Link to='/terms-and-conditions' className='h-full lg:pt-5 pt-2 text-gray-600 font-medium'>Terms and conditions</Link>
               </ul>
             </div>
             <div className='lg:w-1/4 w-full h-full flex flex-col items-center'>
@@ -46,7 +46,7 @@ const Footer = ({ className }) => {
             </div>
           </div>
         </section>
-        <div className='lg:text-base text-sm w-full py-4 border-t-2 flex justify-center items-center text-gray-400'>&#169; 2023 Instaport Delivery. All rights reserved.</div>
+        <div className='lg:text-base text-sm w-full py-4 border-t-2 flex justify-center items-center text-gray-600'>&#169; 2023 Instaport Delivery. All rights reserved.</div>
       </section>
     </section>
   )
