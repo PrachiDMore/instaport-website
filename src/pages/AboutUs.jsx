@@ -9,9 +9,9 @@ export const AboutUs = () => {
       <div className='w-full pt-[120px] h-full'>
         <section className='mx-auto lg:w-[80%] w-full lg:p-7 px-5 py-4 bg-white rounded-xl border-2 border-accentYellow'>
           <h1 className='lg:text-2xl text-xl font-bold mb-4 text-center'>ABOUT US</h1>
-          <p className='pb-2'>You can always rely on Instaport When you need to make a delivery, for something big or small or even lots of goods all in one go, Instaport Delivery is here for you.</p>
-          <p className='pb-2'>It&#39;s fast, reliable and available at any time of the day. Only the most trustworthy and professional drivers can meet Uncle&#39;s standards! That&#39;s why it is known across town as the go-to Instaport to get the job done.</p>
-          <p className='pb-2'>With a powerful mobile and web app, customers of Instaport Delivery can access a fleet of trusted drivers and couriers. We&#39;re fast becoming the on-demand delivery partner of choice for businesses and everyday users across India.</p>
+          <p className='pb-2'>Instaport provides value to the customers, and ready to provide best service with same day delivery. it is the leading platform, for B2B and B2C and easy to access and can work as per costumer convenience.</p>
+          <p className='pb-2'>We have just begun our is to provide world's best delivery service from end-to-end logistics platform and company motto is to provide the premium service to the customer.</p>
+          <p className='pb-2'>Instaport do have quality rated and well profiled delivery executives with good relation and will work as a helping hand for the customers.</p>
         </section>
       </div>
       <Footer />

@@ -6,125 +6,94 @@ const PrivacyPolicy = () => {
   return (
     <section className='px-5 h-auto w-screen Poppins flex flex-col items-center bg-[#fafae0]'>
       <Navbar />
-      <div className='mt-[120px]'>
-        <section className='w-full lg:p-7 py-4 px-5 bg-white rounded-xl border-2 border-accentYellow'>
+      <div className='pt-[120px] w-full'>
+        <section className='mx-auto lg:w-[80%] w-full lg:p-7 px-5 py-4 bg-white rounded-xl border-2 border-accentYellow'>
           <h1 className='lg:text-2xl text-xl font-bold mb-4 text-center'>PRIVACY POLICY</h1>
-          <p className='pb-2'>The web application and mobile application “Antiport Delivery” (collectively referred to as “Platform”) is owned and operated by Antiport Delivery Express Private Limited ("we", "us", "our" and terms of similar meaning), a private limited company incorporated under the Companies Act, 2013 and having its registered office at Lane No: 09, Basant Nagar, Thakkar Bappa Colony, CST Road, Chembur Mumbai 400071.</p>
-          <h1 className='text-xl font-semibold mt-4 self-start'>Introduction</h1>
-          <ul>
-            <li>•	This Privacy Policy applies to personal data of the following persons (jointly referred as “you”):
-              <ul>
-                <li>o	Visitors: individuals who visit our Platform;</li>
-                <li>o	Users: individuals who: (i) use, request or receive Services provided on our Platform; (ii) contact us through our website, Platform or by telephone; (iii) enter into our contests or competitions; or (iv) subscribe to our updates or blog; </li>
-                <li>o	Agents: representatives of businesses who: (i) use, request or receive our Services; (ii) contact us through our website, Platform or by telephone; (iii) enter into our contests or competitions; or (iv) subscribe to our updates or blog; and</li>
-                <li>o	Drivers: individuals who provide or submit applications to us to provide Services through our Platform individually or through partner companies. </li>
-              </ul>
-            </li>
-            <li>•	Your use (both as unregistered user and registered user) of the Platform is subject to the terms of this privacy policy (“Privacy Policy”) and Our Terms and Conditions.</li>
-            <li>•	By using the Platform, and/or by registering with us, you signify that you have carefully read, understood and agree to be bound by this Privacy Policy.  If you disagree with any of the terms of or any part of this Privacy Policy, you must refrain from using the Platform.</li>
-            <li>•	This Privacy Policy may be altered, edited, amended, modified, reviewed, revised or substituted by us at any time with or without prior notice and users are requested to read the Privacy Policy before using or accessing the Platform.  Please check this page regularly to ensure you are familiar with the latest version of the Privacy Policy.</li>
-            <li>•	This Privacy Policy explains how we collect, hold, process, transfer and use the Personal Data provided to us when using our Platform. We only collect Personal Data from minors with the prior consent from a person with parental responsibility for the minor.</li>
-            <li>•	Our Platform connects users of our applications to drivers, including individuals using other modes of transportation, and helps facilitate and manage such drivers to provide on-demand delivery services and purchasing services (“Services”). </li>
-            <li>•	This Privacy Policy forms an integral part of Our Terms and Conditions. </li>
+          <p className='pb-2'>This Privacy Policy ("Policy") applies, without limitation, to customers/service recipients and drivers. It outlines the policies and procedures on the collection, use, disclosure, and protection of your information when you use our website, https://Instaport.in/, or the INSTAPORT mobile applications, Instaport and Instaport Delivery Driver App (collectively, "Instaport apps").</p>
+          <p className='pb-2'>For INSTAPORT DELIVERY SERVICE, your privacy is paramount.</p>
+          <p className='pb-2'>This privacy statement explains how Instaport utilizes and safeguards any information you provide when using this mobile application or website for customers and delivery executives. This Privacy Policy, along with any updated rules, is an electronic contract between you and Instaport as defined by the Information Technology Act of 2000.</p>
+          <p className='pb-2'>We at Instaport are dedicated to protecting your privacy. You may be certain that any information we request from you on this website that allows us to identify you will only be used in compliance with our privacy statement.</p>
+          <p className='pb-2'>The user of the Instaport apps is referred to by the terms "you" and "your". Any services provided by Instaport/You, whether through the Instaport apps or not, are referred to as "Services" above. The appropriate Terms of Service and the Driver Partner Terms and Conditions based on the Instaport user are to be read in conjunction with this Policy, which is a component of and incorporated within them.</p>
+          <p className='pb-2'>You agree and consent to the collection, transfer, use, storage, disclosure, and sharing of your information as specified and collected by us in compliance with this Policy by using the Instaport apps and Services. Please do not use or access the Instaport apps if you disagree with the Policy.</p>
+          <p className='pb-2'>From time to time, Instaport may update this page with new policies.</p>
+
+
+          <h1 className='text-xl font-semibold mt-4 self-start'>WHAT WE NEED</h1>
+          <ul className='pl-3'>
+            <li>• Name and position held.</li>
+            <li>• Contact details, such as an email address.</li>
+            <li>• Demographic data, including address, phone number, login name, postcode, preferences, and interests.</li>
+            <li>• When you use our services, we may gather and keep information about you, including but not limited to your phone number, address, email, billing details, invoices, and other details, in order to fulfill your requests and automatically fill out forms for future transactions.</li>
+            <li>• Additional data pertinent to surveys and/or offers for customers.</li>
+            <li>• Instaport Don't allow access for the delivery of dangerous or harmful products, such as alcohol or narcotics. Legal action will be taken if we discover such practices, and Instaport will not be held accountable for such goods.</li>
+            <li>• Personal sensitive data is defined as any information that can be used to identify a person's race or ethnicity, political views, religious or philosophical convictions, or trade union membership. participation, as well as the handling of genetic, biometric, and health information, as well as information on a person's sexual orientation or sex life, in order to uniquely identify them.</li>
+            <li>• The couriers in order to facilitate the provision of courier services. For instance, Instaport might provide the couriers with the name of the client, the average client rating provided by other couriers, and the locations for the items and parcels to be picked up and delivered.</li>
+            <li>• The general public in the event that the User shares content in a public venue, such as blog entries, social media updates, or other publicly accessible Instaport Service features.</li>
           </ul>
-          <h1 className='text-xl font-semibold mt-4 self-start'>Use of Your Information</h1>
-          <ul>
-            <li>•	The information collected by us through our Platform maybe used inter alia for the following purposes:
-              <ul>
-                <li>o	to allow you to use our Services on the Platform and to carry out our obligations arising from any contracts between you and us.</li>
-                <li>o	to allow you to undertake or initiate any transactions on the Platform </li>
-                <li>o	for internal record keeping by us;</li>
-                <li>o	to improve our Services;</li>
-                <li>o	to improve your usage of the Platform, to manage your account, etc.;</li>
-                <li>o	to process payments with respect to transactions initiated on the Platform;</li>
-                <li>o	to respond to your comments, reviews and questions, provide customer support and better service;</li>
-                <li>o	to communicate important notices or changes to the Services provided by us on the Platform, use of the Platform and the terms/policies which govern the relationship between you and us;</li>
-                <li>o	for internal purposes of us such as enhancing security of the Platform, auditing, testing, troubleshooting, data analysis and research conducted either indirectly/directly by us;</li>
-                <li>o	for promotion and marketing purposes by us;</li>
-                <li>o	to track the order status, processing and delivery as applicable to you;</li>
-                <li>o	for collating your feedback, providing offers, doing surveys and conducting research on our user base for usage and improvement of Services;</li>
-                <li>o	any other purpose that helps to improve our services and benefit you.</li>
-              </ul>
-            </li>
-            <li>•	Personal Data collected by us may not be used for other purposes, unless: (a) you have expressly given your prescribed consent to the use for the relevant other purposes; (b) the purpose is directly related to the purpose for which the Personal Data was collected; or (c) we are permitted to use the Personal Data for other purposes arising from an exemption or otherwise in accordance with applicable law and regulation.</li>
-            <li>•	Your Personal Data collected by us will not be sold, exchanged, shared, transferred or given to a third party for their direct marketing without your prior consent. </li>
+
+
+          <h1 className='text-xl font-semibold mt-6 self-start'>OUR ACTIONS AFTER GATHERING THE INFORMATION</h1>
+          <p>In order to better understand your needs and serve you, we need this information, especially for the following reasons:</p>
+          <ul className='pl-3'>
+            <li>• Maintaining Internal Records</li>
           </ul>
-          <h1 className='text-xl font-semibold mt-4 self-start'>Security and Sharing of Personal Data</h1>
-          <ul>
-            <li>•	Your Personal Data will be stored on servers located within India. </li>
-            <li>•	Our Services require that we share your Personal Data with other users. This includes: (a) sharing Users’ or Agents’ full name, telephone number, Personal Data contained in free text box voluntarily entered by a User, and pick up or drop off locations with Drivers after a delivery has been initiated for the purposes of completing a delivery; and (b) sharing the Driver’s name, telephone number, driver profile information, vehicle information, vehicle picture and geolocation with Users or Agents after a delivery has been initiated for the purposes of completing a delivery;</li>
-            <li>•	We may also share your Personal Data with our employees, officers, third party suppliers, business partners, data processors, auditors, legal advisors etc., for the purpose of fulfilling Services to you.</li>
-            <li>•	We may disclose your Personal Data if required to do so by law or when we believe that such disclosure is appropriate to comply with law or in the good faith belief that such disclosure is reasonably necessary to respond to subpoenas, court orders, or other legal process. We may disclose Personal Data to law enforcement offices, third party rights owners, or others in good faith belief that such disclosure is reasonably necessary to enforce Our Terms and Conditions or Privacy Policy; or protect the rights, property or personal safety of our users or the general public.</li>
-            <li>•	We may need to disclose your information, to (i) protect and defend the rights or property of Ours, including to enforce our agreements, policies, and Terms and Conditions and; (ii) protect the personal safety of you, we, our members and employees, or any person, in an emergency; and (iii) protect us from incurring any legal liability. In such an event, we shall be under no obligation to specifically inform you or seek your approval or consent.</li>
-            <li>•	Any content or Personal Data that you share or upload on any current or future publicly viewable portion of the Platform (on discussion boards, in messages and chat areas, etc.) will be publicly available, and can be viewed by others.</li>
-            <li>•	If you provide a mobile phone number and/or e-mail address, we, or other parties registered on the Platform may call you or send you communications in relation to your use of the Platform or your any transaction initiated by you on the Platform. </li>
-            <li className='font-medium'>•	By accessing the Platform you signify that you have carefully read, understood and agree to be bound by and consent to the collection, use, transfer, retention, alteration, deletion of your information as provided in this Privacy Policy and/or the Terms and Conditions.</li>
-            <li>•	While you have the option to refuse consent, you understand that we cannot provide the service to you unless you consent to this Privacy Policy and/or Terms and Conditions. You may withdraw consent given earlier through notice in writing provided that we would not be able to provide the service to you. Further, in case of such withdrawal, we will delete such personal information unless we are under an obligation under applicable law to retain the same.</li>
-            <li>•	We will ensure third parties are under obligations of confidentiality and compliant with this Privacy Policy before we share your Personal Data with any third parties. Some persons to whom we transfer your Personal Data may be located outside India, in locations that may not have in place data protection laws that are substantially similar to India.</li>
-            <li>•	Once we receive your Personal Data, we will use all reasonably practicable steps to ensure that your Personal Data is stored securely and protected by us and our data processors against unauthorized or accidental access, processing, erasure, loss or use.</li>
-            <li>•	Your Personal Data will be kept confidential and secure except for the purposes and uses as set out in this Privacy Policy and will only be disclosed on a “need-to-know” basis.</li>
-            <li>•	If we outsource and entrust your Personal Data with data processors, we will use contractual and other means to monitor the data processors’ compliance with this Privacy Policy. </li>
-            <li>•	Our security measures may include SSL certificate signing, TLS encryption and hashed password storage.</li>
-            <li>•	You are responsible for keeping your Platform password confidential. We advise you that you must not share your Platform password with anyone. We do not assume any legal duty due to the leak of the password. </li>
-            <li>•	The transmission of information through the internet is not completely secure. Although we adopt security measures to protect your Personal Data, we cannot guarantee the security of your Personal Data transmitted to the Platform and any transmission is at your own risk. </li>
+          <p className='pt-2'>We might make use of the data to enhance our offerings. We may use your information to: </p>
+          <ul className='pl-3'>
+            <li>o Enable you to utilize the Instaport apps' services; and </li>
+            <li>o Fulfill our legal duties under any contracts you may have with us.</li>
           </ul>
-          <h1 className='text-xl font-semibold mt-4 self-start'>Retention of personal data</h1>
-          <ul>
-            <li>•	We will keep your Personal Data for as long as your account registered with Our Platform is being accessed. </li>
-            <li>•	If your account registered with our Platform has not been accessed over a period of three years or we have closed your account upon your request (“End Date”), your Personal Data will be retained by us for seven years after the End Date. We may retain your Personal Data for a longer period if it is necessary for us to do so to comply with our contractual or legal obligations, and you consented to our continued retention of it.  </li>
-            <li>•	At the end of the retention period, we will ensure that your Personal Data, all Platform related data and account-related information will be deleted. For any physical documents containing your Personal Data, the documents will be shredded or otherwise destroyed by means ensuring the confidential and secure destruction of the documents.</li>
-            <li>•	We will ensure that our data processors retain your Personal Data only for as long as is necessary for the fulfillment of the purposes stated in this Privacy Policy. Our data processors will delete Personal Data held if Personal Data is no longer required for the purposes stated in this Privacy Policy unless any deletion is prohibited under law or it is in the public interest for the Personal Data to not be deleted. </li>
+          <ul className='pl-3'>
+            <li>•	Permit you to use the Instaport apps to conduct or start any transactions. </li>
+            <li>•	To keep track of how you use the Instaport apps and to handle your account.</li>
+            <li>•	To handle payments for the transactions you can access through the Instaport apps and to carry out supplementary services.</li>
+            <li>•	 To reply to your reviews, queries, and comments in order to improve services and offer customer assistance.</li>
+            <li>•	 To convey crucial notifications and modifications to the services offered through the Instaport apps; o To monitor the progress of orders, their processing, and the provision of services in accordance with your applicability Any other uses with your permission.</li>
           </ul>
-          <h1 className='text-xl font-semibold mt-4 self-start'>Personal data access requests</h1>
-          <ul>
-            <li>•	You are entitled to request a copy of your personal data held by us under applicable law, unless we are exempted under applicable law from complying with a data access request. You are also entitled to have your data transferred to any other organisation in a machine-readable format. For such requests, please contact the Data Protection Officer through means specified in paragraph 13 of this Privacy Policy. </li>
-            <li>•	We will establish tracking procedures to monitor the progress of compliance with data access requests.</li>
-            <li>•	Unless exempted from doing so, we will provide a copy of the requested data within 40 days after receiving a data access request.  If we are unable to provide the copy of the requested data within 40 days, then we will:
-              <ul>
-                <li>o	Notify you before the expiry of the 40 day period; and </li>
-                <li>o	Provide the copy of the requested data as soon as practicable thereafter. </li>
-              </ul>
-            </li>
-            <li>•	We may charge a fee for the direct and necessary costs incurred in complying with the data access request.  This may include a time-spent charge for compliance (though the persons used will be appropriate for the corresponding task).  Photocopying may be charged at INR2 per page.  We will specify the fees to you as soon as practicable.</li>
-            <li>•	In responding to your data access request, we will not disclose any Personal Data identifying any other individual unless that other individual consents or we can redact the document by omitting the names or other identifying particulars so that we do not disclose the identities of others.</li>
-            <li>•	We must refuse to comply with a data access request for any reason including the following reasons.
-              <ul>
-                <li>o	We are not supplied with information to be satisfied as to the identity of the person making the request or his authority;</li>
-                <li>o	We cannot comply with the request without disclosing the Personal Data of a third party;</li>
-                <li>o	Where compliance with the request is for the time being prohibited by applicable law;</li>
-                <li>o	The request is not in writing in English;</li>
-                <li>o	We are not supplied with information to enable us to locate the requested personal data; </li>
-                <li>o	The request follows two or more similar requests, and it is unreasonable for us to comply with the request in the circumstances;</li>
-                <li>o	Another party controls the use of the requested data in a way that prohibits us from complying with the request (in which case we must inform the applicant of the name and address of the other party); and</li>
-                <li>o	We are permitted by law to refuse the request, or may rely on an exemption from doing so.</li>
-              </ul>
-            </li>
-            <li>•	If we refuse to comply with a data access request, we will give you written notice and provide reasons for refusal within 40 days from receiving the request.</li>
-            <li>•	We will keep a record of the particulars of the reasons for refusal of a data access request for at least four years from the date of refusal.</li>
+          <p className='py-2'>We might use the email address and mobile number you have provided to send you promotional emails, SMSs, and voice calls on occasion regarding new goods, special deals, or other information we think you would find interesting.</p>
+          <p className='pb-2'>We could occasionally use your information to get in touch with you for market research. We could get in touch with you by mail, fax, phone, SMS, or email. We might utilize the data to tailor the website to your preferences.</p>
+
+          <h1 className='text-xl font-semibold mt-4 self-start'>DESCRIPTION</h1>
+          <p>We may disclose to third-party services certain personally identifiable information listed below:</p>
+          <ul className='pl-3'>
+            <li>•	Data that we gather as you use and access our service, such as your location, device type, and network provider. If consumers allow it, we use their mobile devices' location data, either exact or approximative, in the foreground when using the Instaport apps. This information is gathered by Instaport whenever a ride or delivery is requested, during its duration, and while the app is open in the front of the user's mobile device. To improve your experience with our apps, we use this data. enhancing pick-up locations, activating security features, and identifying and stopping fraud are just a few examples. Even if the client hasn't given us permission to gather location data from their device, Instaport nevertheless gathers the Driver Partner's location data and connects it to the customer's account. This makes it possible for us to provide services to our clients, such as customer support and receipt creation.</li>
+            <li>•	Data you give us, including your name, email address, mobile number, and language.</li>
           </ul>
-          <h1 className='text-xl font-semibold mt-4 self-start'>Personal data correction requests</h1>
-          <ul>
-            <li>•	You may request us to make necessary corrections in respect of any Personal Data that you consider inaccurate, after we have fulfilled a data access request from you.</li>
-            <li>•	We will correct any inaccurate Personal Data notified in a data correction request without charge and within 40 days of receiving the request.</li>
-            <li>•	We may refuse to correct the Personal Data if we believe the Personal Data is accurate or an expression of opinion or the proposed correction is inaccurate.  We will inform you in writing of the refusal and the reasons for it.</li>
-            <li>•	We will keep a record of the particulars of the reasons for refusal of a data correction request for at least four years from the date of refusal.</li>
+          <p className='pt-2'>Contracts that we have with other companies that provide services allow us to share this information with them so that we can:</p>
+          <ul className='pl-3'>
+            <li>•	If you work as a Delivery Executive for INSTAPORT, we may give other users access to your name, contact information, and/or profile picture (if applicable) in order to deliver the Services to them.</li>
+            <li>•	When required by law, acting in good faith, adhering to orders or procedures, or when detecting and preventing actual or potential instances of identity theft, fraud, abuse of services, and other illegal acts, we may share this information with governmental agencies, law enforcement agencies, or other businesses that are supporting us.</li>
+            <li>•	Customize the Instaport applications to your preferences for the best possible experience.</li>
+            <li>•	Administer behavioral analytics.</li>
+            <li>•	Information sharing for the purpose of supporting our services with our vendors, consultants, marketing partners, research firms, and other service providers or business partners, such as companies that handle payments.</li>
+            <li>•	In order to conduct academic research, we might disclose your information to our academic partners.</li>
           </ul>
-          <h1 className='text-xl font-semibold mt-4 self-start'>Applicable Laws</h1>
-          <ul>
-            <li>•	You agree that this Privacy Policy and any security measures that we may take to secure Personal Information (as defined under the Information Technology Act and the rules made thereunder) or Sensitive Personal Data or Information (as defined under the Information Technology Act and the rules made thereunder) on the Platform constitutes reasonable security practices and procedures under section 43A of the Information Technology Act, 2000.</li>
-          </ul>
-          <h1 className='text-xl font-semibold mt-4 self-start'>Miscellaneous</h1>
-          <ul>
-            <li>•	External Links. While accessing the Platform you will come across external links to other websites.  Although the Platform only looks to include quality, safe and relevant external links, you are required to exercise caution before clicking any external web links provided on the Platform.  We disclaim all liability against any loss suffered by you from accessing those external links.  Your use of such external links would be governed by the Terms and Conditions and the privacy policy of such external websites.</li>
-            <li>•	Anti-Money Laundering Policy.  In order to comply with anti-money laundering laws that exist in various jurisdictions we reserve the right to report suspicious transactions to federal, state, provincial or local authorities and law enforcement agencies within those jurisdictions. In exchange for us permitting you to participate in, use and access the Platform and Services you hereby grant us the right to report any transactions that we deem suspicious, as determined solely by us acting in its sole discretion.  If for any reason we are of the belief or become aware of any transaction which we deem suspicious in nature, we may without prior notice or explanation to you take the following actions, which are in addition to all other rights and remedies available to us under this Privacy Policy, at law or in equity:
-              <ol>
-                <li>1.	report such transaction to the concerned law enforcement agencies;</li>
-                <li>2.	de-activate or terminate your account on the Platform forthwith;</li>
-                <li>3.	restrict you from creating a new account on the Platform. </li>
-              </ol>
-            </li>
-            <li>•	Suspicious transactions.  If we have reasonable apprehension that you may be misusing our Services for any unlawful activities such as financing terrorism, or other criminal activities, you hereby grant us the right to report any transactions which we deem suspicious, as determined solely by us acting in its sole discretion. </li>
-          </ul>
+
+
+          <h1 className='text-xl font-semibold mt-4 self-start'>SAFETY IS A PRIORITY</h1>
+          <p className='pb-2'>We are dedicated to protecting the security of your information. We have implemented appropriate physical, electronic, and managerial procedures in compliance with the Information Technology (Reasonable security practices and procedures and sensitive personal data or information) Rules, 2011 ("IT RSP Rules") to protect and secure the data we collect online. This is done to prevent unauthorized access or disclosure. We only keep the information we gather from you for as long as it is reasonably necessary for us to provide our services, or for as long as may be necessary to comply with Indian legal requirements. You agree to maintain the strict confidentiality of your information as well as any other data you get from the Instaport apps.</p>
+
+
+          <h1 className='text-xl font-semibold mt-4 self-start'>REMOVAL OR NON-PROVISION OF INFORMATION</h1>
+          <p className='pb-2'>It is important for you to know that you have the choice not to give the requested information. You will always have the choice to revoke your prior consent to Instaport by getting in touch with us, whether or not you are using the services. The body corporate must receive written notice of this consent withdrawal. Instaport will, however, be free to decline to offer any Services for which the aforementioned information was requested in those situations.</p>
+
+
+          <h1 className='text-xl font-semibold mt-4 self-start'>OUR USE OF COOKIES</h1>
+          <p className='pb-2'>A cookie is a little file that requests authorization to be stored on the hard disk of your computer. Once you accept, the file is added, and the cookie informs you when you visit a specific website or assists in the analysis of web traffic. Cookies enable personalized responses from web apps. By collecting and storing information about your preferences, the web application can adjust its functionality to your needs, preferences, and likes and dislikes.</p>
+          <p className='pb-2'>Cookies from traffic logs are utilized by us to determine which pages are being used. This aids in the analysis of website traffic statistics and helps us make improvements to our website to better meet the needs of users. This data is only used for statistical analysis; after that, it is deleted from the system.</p>
+          <p className='pb-2'>In general, cookies enable us to track which pages you find useful and which you do not, which helps us provide you with a better experience on our website. Other than the information you choose to share with us, a cookie in no way allows us access to your computer or any personal information about you.</p>
+          <p className='pb-2'>You have the option to accept or reject cookies. Although the majority of web browsers accept cookies by default, you can typically change your browser's settings to reject cookies if you'd like. You might not be able to utilize the website and/or Instaport apps to their full potential as a result.</p>
+
+
+          <h1 className='text-xl font-semibold mt-4 self-start'>CONTACT WITH US</h1>
+          <p className='pb-2'>You can use the details on the support page to get in touch with us if you have any concerns about this privacy statement or if you want to report a violation of it.</p>
+
+
+          <h1 className='text-xl font-semibold mt-4 self-start'>GRIEVANCE OFFICER</h1>
+          <p className='pb-2'><span className='font-medium'>Address:</span> Chembur, MG 68-2, Basant Nagar, Thakkar Bappa colony, Chembur, Mumbai</p>
+          <p className='pb-2'><span className='font-medium'>City:</span> Mumbai    <span className='font-medium'>State:</span> Maharashtra  <span className='font-medium'>Postcode:</span> 400071</p>
+          <p className='pb-2'><span className='font-medium'>Time:</span> Monday to Friday (10 a.m. to 6 p.m.)</p>
+          <p className='pb-2'><span className='font-medium'>Email id :</span> instaportdelivery@gmail.com</p>
+
         </section>
       </div>
       <Footer />
