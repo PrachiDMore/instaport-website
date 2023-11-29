@@ -119,8 +119,8 @@ export const TermsAndConditions = () => {
           <p className='pb-2'>For security purposes exclusively, mobile technology is used to continuously track all vehicles registered with the company. It is explicitly stated here that the Company does not own any cars and does not, either directly or indirectly, hire laborers to load or unload cargo or drivers for the vehicles. The Company disclaims any and all liability(ies) with regard to the labor, drivers, and cars combined, as these are provided by third parties.</p>
           <p className='pb-2'>The company is permitted to use the contact details provided by customers for its own marketing initiatives. The mobile numbers registered with the Company may get information via SMS on a regular basis.</p>
 
-          <h1 className='text-xl font-semibold mt-4 self-start'>INSTAPORT DELIVERY REFERRAL PROGRAM</h1>
-          <p className='pb-2'> Please find all referral-related terms and conditions   [here](https://instaport delivery.in/referral-inc</p>
+          {/* <h1 className='text-xl font-semibold mt-4 self-start'>INSTAPORT DELIVERY REFERRAL PROGRAM</h1>
+          <p className='pb-2'> Please find all referral-related terms and conditions   [here](https://instaport delivery.in/referral-inc</p> */}
 
           <h1 className='text-xl font-semibold mt-4 self-start'>ACTIONS PURSUANT TO THIRD PARTIES</h1>
           <p className='pb-2'>You promise us that, even in the event that we were careless or in default, you will not allow anyone else with an interest in the consignment to file a claim or action against us arising out of the carriage, and that, in the event that such a claim or action is filed, you will indemnify us against the results of the claim or action as well as the costs and expenses we incur in defending it.</p>
