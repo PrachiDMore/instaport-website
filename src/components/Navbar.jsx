@@ -44,7 +44,7 @@ const Navbar = ({ comingsoon = false }) => {
 								<Link to={"/about-us"}>About us</Link>
 							</div>
 							<div className='flex gap-7 items-center'>
-								{!localStorage.getItem("token") && <Button filled={true} text={"SignIn"} onClick={handleSignin}/>}
+								{!localStorage.getItem("token") && <Button filled={true} text={"SignIn"} onClick={() => setShowSigninModal(true)}/>}
 								{!localStorage.getItem("token") && <Button text={"SignUp"} onClick={handleSignin}/>}
 								{localStorage.getItem("token") && <button onClick={() => {localStorage.removeItem("token"); window.location.reload()}}>Logout</button>}
 								{/* <Button onClick={handleSignUp} text={"Register "} className={'w-32'} /> */}
@@ -52,7 +52,7 @@ const Navbar = ({ comingsoon = false }) => {
 						</div>
 					</nav>
 			}
-			{/* <Signin showSigninModal={showSigninModal} setShowSigninModal={setShowSigninModal}/> */}
+			<Signin showSigninModal={showSigninModal} setShowSigninModal={setShowSigninModal}/>
 		</>
 	)
 }

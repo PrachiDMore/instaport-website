@@ -5,8 +5,60 @@ import Footer from '../components/Footer'
 import { GrLocation } from 'react-icons/gr'
 import { BsFillBox2Fill } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import axios from 'axios'
 
 const Home = () => {
+	const [distance, setDistance] = useState(0);
+	const [calculationLoading, setCalculationLoading] = useState(false);
+	const [pricingData, setPricingData] = useState();
+
+	const calculateRate = () => {
+		try {
+			setCalculationLoading(true);
+			const google = window.google;
+
+			const directionsService = new google.maps.DirectionsService();
+
+			directionsService.route(
+				{
+					origin: { lat: pickupAddress.latitude, lng: pickupAddress.longitude },
+					destination: { lat: dropAddress.latitude, lng: dropAddress.longitude },
+					travelMode: google.maps.TravelMode.DRIVING,
+				},
+				(response, status) => {
+					if (status === 'OK') {
+						const route = response.routes[0];
+						if (route && route.legs && route.legs.length > 0) {
+							setDistance((route.legs[0].distance.value / 1000).toFixed(2));
+							axios("https://insta-port-backend-api.vercel.app/price/get", {
+								method: "GET"
+							})
+								.then((res) => {
+									if (res.data.error) return
+									setPricingData(res.data?.priceManipulation)
+								})
+						}
+					} else {
+						alert('Directions request failed due to ' + status);
+					}
+				}
+			);
+			setCalculationLoading(false)
+		} catch (error) {
+			alert("Something went wrong! Try reloading the page!")
+		}
+
+	}
+	const addressInitialState = {
+		text: "",
+		latitude: 0,
+		longitude: 0,
+	}
+	const [pickupAddress, setPickupAddress] = useState(addressInitialState);
+	const [dropAddress, setDropAddress] = useState(addressInitialState);
 	return (
 		<>
 			<div className='w-screen overflow-x-hidden'>
@@ -34,7 +86,7 @@ const Home = () => {
 
 
 			{/* Calculate the Fare section-3 */}
-			<section className='overflow-x-hidden w-full relative Poppins hidden flex-col border-b-2 px-28 py-10 '>
+			<section className='overflow-x-hidden w-full relative Poppins flex flex-col border-b-2 px-28 py-10 '>
 				<img src="/assets/BG/bg-shape-5.png" className='absolute left-[33%] top-5 z-0' alt="" />
 				<h1 className='text-3xl md:text-5xl font-semibold'>Calculate the Fare</h1>
 				<p className='text-lg pt-2'>No extra cost for urgent delivery</p>
@@ -52,7 +104,58 @@ const Home = () => {
 									<span className='text-accentYellow'><BsFillBox2Fill /></span>
 									<label className='font-medium pb-2 text-lg' htmlFor="">Pickup point:</label>
 								</div>
-								<input className='py-1 border-b-2 outline-none' type="text" name="" id="" placeholder='Enter pickup Point' />
+								<PlacesAutocomplete
+									value={pickupAddress.text}
+									onChange={(e) => {
+										setPickupAddress({ ...pickupAddress, text: e })
+									}}
+									onSelect={(e) => {
+										setPickupAddress({ ...pickupAddress, text: e })
+										geocodeByAddress(e)
+											.then(results => getLatLng(results[0]))
+											.then(latLng => {
+												console.log({ ...pickupAddress, text: e, latitude: latLng.lat, longitude: latLng.lng })
+												setPickupAddress({ ...pickupAddress, text: e, latitude: latLng.lat, longitude: latLng.lng })
+											})
+											.catch(error => console.error('Error', error));
+									}}
+									debounce={200}
+									shouldFetchSuggestions={true}
+								>
+									{({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+										<div className='relative w-full z-[1000]'>
+											<input
+												{...getInputProps({
+													placeholder: 'Enter your pickup address',
+													className: 'w-full location-search-input outline-none py-3 focus:border-accentYellow border-b-2 w-full',
+												})}
+											/>
+											<div className="absolute autocomplete-dropdown-container w-full shadow-lg">
+												{loading && <div className='w-full px-3 py-3 bg-white'>Loading...</div>}
+												{suggestions.map((suggestion, index) => {
+													const className = suggestion.active
+														? 'suggestion-item--active px-3 py-3'
+														: 'suggestion-item px-3 py-3';
+													// inline style for demonstration purpose
+													const style = suggestion.active
+														? { backgroundColor: '#eee', cursor: 'pointer' }
+														: { backgroundColor: '#ffffff', cursor: 'pointer' };
+													return (
+														<div
+															key={index}
+															{...getSuggestionItemProps(suggestion, {
+																className,
+																style,
+															})}
+														>
+															<span>{suggestion.description}</span>
+														</div>
+													);
+												})}
+											</div>
+										</div>
+									)}
+								</PlacesAutocomplete>
 							</div>
 							<div className='flex flex-col py-3 relative'>
 								<div className='absolute right-3 bottom-6 '>
@@ -60,13 +163,66 @@ const Home = () => {
 								</div>
 								<div className='flex gap-2 items-baseline'>
 									<div className='text-accentYellow'><BsFillBox2Fill /></div>
-									<lable className='font-medium py-2 text-lg ' htmlFor="">Dropup point:</lable>
+									<lable className='font-medium py-2 text-lg ' htmlFor="">Drop point:</lable>
 								</div>
-								<input className='py-1 border-b-2 outline-none' type="text" name="" id="" placeholder='Enter Drop Point' />
+								<PlacesAutocomplete
+									value={dropAddress.text}
+									onChange={(e) => {
+										setDropAddress({ ...dropAddress, text: e })
+									}}
+									onSelect={(e) => {
+										setDropAddress({ ...dropAddress, text: e })
+										geocodeByAddress(e)
+											.then(results => getLatLng(results[0]))
+											.then(latLng => {
+												setDropAddress({ ...dropAddress, text: e, latitude: latLng.lat, longitude: latLng.lng })
+											})
+											.catch(error => console.error('Error', error));
+									}}
+									debounce={200}
+									shouldFetchSuggestions={true}
+								>
+									{({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+										<div className='relative w-full z-[990]'>
+											<input
+												{...getInputProps({
+													placeholder: 'Enter your drop address',
+													className: 'w-full location-search-input outline-none py-3 focus:border-accentYellow border-b-2 w-full',
+												})}
+											/>
+											<div className="absolute autocomplete-dropdown-container w-full shadow-lg">
+												{loading && <div className='w-full px-3 py-3 bg-white'>Loading...</div>}
+												{suggestions.map((suggestion, index) => {
+													const className = suggestion.active
+														? 'suggestion-item--active px-3 py-3'
+														: 'suggestion-item px-3 py-3';
+													// inline style for demonstration purpose
+													const style = suggestion.active
+														? { backgroundColor: '#eee', cursor: 'pointer' }
+														: { backgroundColor: '#ffffff', cursor: 'pointer' };
+													return (
+														<div
+															key={index}
+															{...getSuggestionItemProps(suggestion, {
+																className,
+																style,
+															})}
+														>
+															<span>{suggestion.description}</span>
+														</div>
+													);
+												})}
+											</div>
+										</div>
+									)}
+								</PlacesAutocomplete>
 							</div>
 							<div className='flex justify-center items-center pt-5'>
-								<Button text={"Calculate"} />
+								<Button onClick={calculateRate} text={"Calculate"} />
 							</div>
+							{pricingData && <div className='flex justify-center'>
+								<div className='w-max mt-4 px-5 py-2 rounded-full border-2 border-accentYellow bg-white'>Fare: {(distance * Number(pricingData?.per_kilometer_charge)).toFixed(2)}</div>
+							</div>}
 						</div>
 					</div>
 				</div>

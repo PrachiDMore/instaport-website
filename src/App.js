@@ -7,6 +7,8 @@ import { TermsAndConditions } from './pages/TermsAndConditions';
 import { AboutUs } from './pages/AboutUs';
 import { CancellationAndRefund } from './pages/CancellationAndRefund';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import TopUp from './pages/TopUp';
+import Signin from './components/Signin';
 
 function App() {
   return (
@@ -18,8 +20,9 @@ function App() {
           <Route path="/create-order" element={<CreateOrder />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/cancellation-and-refund" element={<CancellationAndRefund/>} />
+          <Route path="/cancellation-and-refund" element={<CancellationAndRefund />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+          <Route path="/topup/:token" element={<TopUp />} />
         </Routes>
       </Router>
     </>

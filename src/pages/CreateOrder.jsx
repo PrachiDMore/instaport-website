@@ -142,7 +142,7 @@ const CreateOrder = () => {
                   />
                   <div className="absolute autocomplete-dropdown-container w-full shadow-lg">
                     {loading && <div className='w-full px-3 py-3 bg-white'>Loading...</div>}
-                    {suggestions.map(suggestion => {
+                    {suggestions.map((suggestion, index) => {
                       const className = suggestion.active
                         ? 'suggestion-item--active px-3 py-3'
                         : 'suggestion-item px-3 py-3';
@@ -152,6 +152,7 @@ const CreateOrder = () => {
                         : { backgroundColor: '#ffffff', cursor: 'pointer' };
                       return (
                         <div
+                        key={index}
                           {...getSuggestionItemProps(suggestion, {
                             className,
                             style,
