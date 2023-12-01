@@ -86,15 +86,15 @@ const Home = () => {
 
 
 			{/* Calculate the Fare section-3 */}
-			<section className='overflow-x-hidden w-full relative Poppins flex flex-col border-b-2 px-28 py-10 '>
+			<section className='overflow-x-hidden w-full relative Poppins flex flex-col border-b-2 lg:px-28 px-5 py-10 '>
 				<img src="/assets/BG/bg-shape-5.png" className='absolute left-[33%] top-5 z-0' alt="" />
 				<h1 className='text-3xl md:text-5xl font-semibold'>Calculate the Fare</h1>
 				<p className='text-lg pt-2'>No extra cost for urgent delivery</p>
-				<div className='flex w-full h-full items-center'>
-					<div className='w-1/2 h-full flex items-center justify-center'>
+				<div className='flex w-full h-full items-center lg:flex-row flex-col'>
+					<div className='lg:w-1/2 w-full h-full flex items-center justify-center'>
 						<img className='h-[28rem]' src="/assets/section3.png" alt="" />
 					</div>
-					<div className='w-1/2 h-auto flex justify-center items-center z-50'>
+					<div className='lg:w-1/2 w-full h-auto flex justify-center items-center z-50'>
 						<div className='bg-white z-50 border-2 w-[90%] custom-shadow rounded-3xl p-12'>
 							<div className='flex flex-col pb-3 relative'>
 								<div className='absolute right-3 bottom-6 '>
