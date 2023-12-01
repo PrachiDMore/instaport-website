@@ -6,27 +6,7 @@ import Signin from './Signin'
 import { useState } from 'react'
 
 const Navbar = ({ comingsoon = false }) => {
-	const [showSigninModal, setShowSigninModal] = useState([])
-	const handleSignin = () => {
-		const phone = prompt("Phone Number");
-		const password = prompt("Password");
-		if (phone && password) {
-			axios("https://instaport-api.vercel.app/user/signin", {
-				method: "POST",
-				data: { mobileno: phone, password }
-			})
-				.then((res) => {
-					if (!res.data.error) {
-						localStorage.setItem("token", res.data.token)
-						alert(res.data.message)
-						window.location.reload()
-					}
-				})
-				.catch((err) => {
-					alert(err.messsage)
-				})
-		}
-	}
+	const [showSigninModal, setShowSigninModal] = useState(false)
 	return (
 		<>
 			{
@@ -45,7 +25,7 @@ const Navbar = ({ comingsoon = false }) => {
 							</div>
 							<div className='flex gap-7 items-center'>
 								{!localStorage.getItem("token") && <Button filled={true} text={"SignIn"} onClick={() => setShowSigninModal(true)}/>}
-								{!localStorage.getItem("token") && <Button text={"SignUp"} onClick={handleSignin}/>}
+								{/* {!localStorage.getItem("token") && <Button text={"SignUp"} onClick={handleSignin}/>} */}
 								{localStorage.getItem("token") && <button onClick={() => {localStorage.removeItem("token"); window.location.reload()}}>Logout</button>}
 								{/* <Button onClick={handleSignUp} text={"Register "} className={'w-32'} /> */}
 							</div>
