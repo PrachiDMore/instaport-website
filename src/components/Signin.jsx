@@ -28,7 +28,7 @@ const Signin = ({ showSigninModal, setShowSigninModal }) => {
   return (
     <div>
 
-      <div id="authentication-modal" tabindex="-1" aria-hidden="true" class={showSigninModal ? "bg-black/50 h-screen flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 opacity-100 duration-500" : "bg-black/50 h-screen flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 opacity-0 pointer-events-none duration-500"}>
+      <div id="authentication-modal" tabindex="-1" aria-hidden="true" class={showSigninModal ? "bg-black/50 h-screen flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-[50000] justify-center items-center w-full md:inset-0 opacity-100 duration-500" : "bg-black/50 h-screen flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-[50000] justify-center items-center w-full md:inset-0 opacity-0 pointer-events-none duration-500"}>
         <div class="relative p-4 w-full max-w-md max-h-full">
 
           <div class="relative bg-white rounded-lg shadow">
