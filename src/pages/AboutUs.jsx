@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
-export const AboutUs = () => {
+const AboutUs = () => {
   return (
     <section className='h-screen px-5 w-screen Poppins flex flex-col items-center bg-[#fafae0]'>
       <Navbar />
@@ -18,3 +18,5 @@ export const AboutUs = () => {
     </section>
   )
 }
+
+export default AboutUs

@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
-export const CancellationAndRefund = () => {
+const CancellationAndRefund = () => {
   return (
     <section className='px-5 h-auto w-screen Poppins flex flex-col items-center bg-[#fafae0]'>
       <Navbar />
@@ -36,3 +36,5 @@ export const CancellationAndRefund = () => {
     </section>
   )
 }
+
+export default CancellationAndRefund

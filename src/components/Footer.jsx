@@ -34,8 +34,8 @@ const Footer = ({ className }) => {
               <ul className='flex flex-col h-max'>
                 {/* <li className='h-full lg:pb-5 pb-2 text-gray-600 font-medium'>For Businesses</li> */}
                 <li className='h-full lg:pb-5 pb-2 text-gray-600 font-medium'>FAQs</li>
-                <li className='h-full lg:py-5 py-2 text-gray-600 font-medium'>Pricing</li>
-                <Link to='/terms-and-conditions' className='h-full lg:pt-5 pt-2 text-gray-600 font-medium'>Terms and conditions</Link>
+                <Link to='/terms-and-conditions/customer'className='h-full lg:py-5 py-2 text-gray-600 font-medium'>Terms and conditions</Link>
+                <Link to='/terms-and-conditions/rider' className='h-full lg:pt-5 pt-2 text-gray-600 font-medium'>Terms and conditions Rider</Link>
               </ul>
             </div>
             <div className='lg:w-1/4 w-full h-full flex flex-col items-center'>
