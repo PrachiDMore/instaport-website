@@ -22,6 +22,11 @@ const CreateOrder = () => {
     text: "",
     latitude: 0,
     longitude: 0,
+    phone_number: "",
+    instructions: "",
+    building: "",
+    floor: "",
+    flatno: ""
   }
   const [pickupAddress, setPickupAddress] = useState(addressInitialState);
   const [dropAddress, setDropAddress] = useState(addressInitialState);
@@ -38,8 +43,137 @@ const CreateOrder = () => {
     payment_method: "cod",
     package: "",
     parcel_value: 0,
+    vehicle: "scooty"
   }
   const [formState, setFormState] = useState(initialFormState)
+  const [priceData, setPriceData] = useState();
+  const [distance, setDistance] = useState(0);
+  const [payment, setPayment] = useState("cod")
+
+  useEffect(() => {
+    axios("https://insta-port-backend-api.vercel.app/price/get", {
+      method: "GET"
+    })
+      .then((res) => {
+        setPriceData(res.data.priceManipulation)
+      })
+  }, [])
+
+  var responseHandler = async function (txn) {
+    if (txn.status === 200) {
+      axios("https://insta-port-backend-api.vercel.app/customer-transactions/create-payment", {
+        method: "POST",
+        data: {
+          transaction: txn.txnResponse.transaction_response,
+        },
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+      })
+        .then((res) => {
+          axios("https://insta-port-backend-api.vercel.app/order/create", {
+            method: "POST",
+            data: { ...formState, pickup: pickup, drop: drop, amount: res.data.transaction.amount, payment_method: res.data.transaction.payment_method_type },
+            headers: {
+              "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+          })
+            .then((res) => {
+              if(res.data.error){
+                alert("Something went wrong")
+              }else{
+                alert(res.data.message)
+              }
+            })
+            .catch((err) => {
+              console.error(err)
+            })
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    }
+  }
+
+  const handlePayment = () => {
+    let ip = "";
+    let amount = (priceData?.additional_per_kilometer_charge * distance).toFixed(2)
+    fetch('https://api.ipify.org?format=json')
+      .then(response => response.json())
+      .then((data) => {
+        ip = data.ip
+      });
+    axios("https://insta-port-backend-api.vercel.app/auth/create-order", {
+      method: "POST",
+      data: {
+        ip: ip,
+        user_agent: window.navigator.userAgent,
+        amount: amount
+      }
+    })
+      .then((res) => {
+
+        var flow_config = {
+          merchantId: "UATINSPTV2",
+          bdOrderId: res.data.bdorderid,
+          authToken: res.data.authorization,
+          childWindow: true,
+          retryCount: 0,
+          prefs: {
+            "payment_categories": ["card", "upi", "qr"],
+          },
+          themeConfig: {
+            sdkPrimaryColor: "#69068a",
+            sdkAccentColor: "#cf5df5",
+            sdkBackgroundColor: "#f2caff",
+            sdkBannerColor: "#982cbb"
+          }
+        };
+
+        var config = {
+          merchantLogo: "https://instaportdelivery.com/assets/logo/logo.png",
+          flowConfig: flow_config,
+          flowType: "payments",
+          responseHandler: responseHandler,
+        };
+
+        var xmlhttp = new XMLHttpRequest();
+        var jsonObj = "";
+        {
+          window.loadBillDeskSdk(config);
+        };
+      })
+
+  }
+
+  const calculateRate = () => {
+    try {
+      const google = window.google;
+
+      const directionsService = new google.maps.DirectionsService();
+
+      directionsService.route(
+        {
+          origin: { lat: pickup.latitude, lng: pickup.longitude },
+          destination: { lat: drop.latitude, lng: drop.longitude },
+          travelMode: google.maps.TravelMode.DRIVING,
+        },
+        (response, status) => {
+          if (status === 'OK') {
+            const route = response.routes[0];
+            if (route && route.legs && route.legs.length > 0) {
+              setDistance((route.legs[0].distance.value / 1000).toFixed(2));
+            }
+          } else {
+            alert('Directions request failed due to ' + status);
+          }
+        }
+      );
+    } catch (error) {
+      alert("Something went wrong! Try reloading the page!")
+    }
+
+  }
 
   const handleChange = (e) => {
     setFormState({
@@ -49,23 +183,7 @@ const CreateOrder = () => {
   }
 
   const handleSubmit = () => {
-    axios("https://instaport-api.vercel.app/order/create", {
-      method: "POST",
-      data: { ...formState, pickup: { address: pickupAddress, ...pickup }, drop: { address: dropAddress, ...drop }, payment_address: { address: pickupAddress, ...pickup } },
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`
-      }
-    })
-      .then((res) => {
-        if (!res.data.error) {
-          alert(res.data.message)
-        } else {
-          alert(res.data.message)
-        }
-      })
-      .catch((err) => {
-        alert(err.message)
-      })
+
   }
   return (
     <section className='h-auto w-screen Poppins flex flex-col bg-[#fafae0]'>
@@ -82,7 +200,7 @@ const CreateOrder = () => {
             </div>
             <div>
               <div className='text-xl font-medium leading-tight'>Deliver Now</div>
-              <div className='font-medium '>from ₹44</div>
+              <div className='font-medium '>from ₹{priceData?.base_order_charges}</div>
               <div className='text-sm text-gray-500'>The closest courier will be designated to pick up and deliver as soon as possible.</div>
             </div>
           </div>
@@ -92,7 +210,7 @@ const CreateOrder = () => {
             </div>
             <div>
               <div className='text-xl font-medium leading-tight'>Schedule</div>
-              <div className='font-medium '>from ₹44</div>
+              <div className='font-medium '>from ₹{priceData?.base_order_charges}</div>
               <div className='text-sm text-gray-500'>The delivery boy will pick up and drop the each parcel at the mentioned time</div>
             </div>
           </div>
@@ -111,21 +229,21 @@ const CreateOrder = () => {
         </div>
 
         {/* third box */}
-        <div className='border-accentYellow border-2 bg-white lg:w-[80%] w-full h-auto flex flex-col lg:gap-6 gap-3 my-4 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
-          <h1 className='text-xl'>Address 1</h1>
+        <div className='border-accentYellow border-2 bg-white lg:w-[80%] w-full h-auto flex flex-col lg:gap-3 gap-3 my-4 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
+          <h1 className='text-xl mb-1 font-bold'>Address 1</h1>
           <div className='w-full flex flex-col items-start'>
             <label htmlFor={"i"} className='pb-1 lg:text-base text-sm' >{"Pickup Address"}</label>
             <PlacesAutocomplete
-              value={pickupAddress.text}
+              value={pickup.text}
               onChange={(e) => {
-                setPickupAddress({ ...pickupAddress, text: e })
+                setPickup({ ...pickup, text: e })
               }}
               onSelect={(e) => {
-                setPickupAddress({ ...pickupAddress, text: e })
+                setPickup({ ...pickup, text: e })
                 geocodeByAddress(e)
                   .then(results => getLatLng(results[0]))
                   .then(latLng => {
-                    setPickupAddress({ ...pickupAddress, text: e, latitude: latLng.lat, longitude: latLng.lng })
+                    setPickup({ ...pickup, text: e, latitude: latLng.lat, longitude: latLng.lng })
                   })
                   .catch(error => console.error('Error', error));
               }}
@@ -152,7 +270,7 @@ const CreateOrder = () => {
                         : { backgroundColor: '#ffffff', cursor: 'pointer' };
                       return (
                         <div
-                        key={index}
+                          key={index}
                           {...getSuggestionItemProps(suggestion, {
                             className,
                             style,
@@ -167,26 +285,31 @@ const CreateOrder = () => {
               )}
             </PlacesAutocomplete>
           </div>
+          <div className='grid grid-cols-3 gap-x-4'>
+            <Input onChange={(e) => { setPickup({ ...pickup, building: e.target.value }) }} value={pickup.building} label={"Building"} type={"text"} placeholder={"Enter your building name"} id={"building"} />
+            <Input onChange={(e) => { setPickup({ ...pickup, floor: e.target.value }) }} value={pickup.floor} label={"Floor"} type={"text"} placeholder={"Enter your floor no."} id={"floor"} />
+            <Input onChange={(e) => { setPickup({ ...pickup, flatno: e.target.value }) }} value={pickup.flatno} label={"Flat no."} type={"text"} placeholder={"Enter your flat no."} id={"flatno"} />
+          </div>
           <Input onChange={(e) => { setPickup({ ...pickup, phone_number: e.target.value }) }} value={pickup.phone_number} label={"Mobile Number"} type={"text"} placeholder={"Enter your 10 digit mobile number"} id={"phone_number"} />
           <Input onChange={(e) => { setPickup({ ...pickup, instructions: e.target.value }) }} value={pickup.instructions} label={"Instructions"} type={"text"} placeholder={"Instructions"} id={"instructions"} />
         </div>
 
         {/* fourth box */}
-        <div className='border-accentYellow border-2 bg-white lg:w-[80%] w-full h-auto flex flex-col lg:gap-6 gap-3 my-4 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
-          <h1 className='text-xl'>Address 2</h1>
+        <div className='border-accentYellow border-2 bg-white lg:w-[80%] w-full h-auto flex flex-col lg:gap-3 gap-3 my-4 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
+          <h1 className='text-xl mb-1 font-bold'>Address 2</h1>
           <div className='w-full flex flex-col items-start'>
             <label htmlFor={"i"} className='pb-1 text-sm lg:text-base' >{"Drop Address"}</label>
             <PlacesAutocomplete
-              value={dropAddress.text}
+              value={drop.text}
               onChange={(e) => {
-                setDropAddress({ ...dropAddress, text: e })
+                setDrop({ ...drop, text: e })
               }}
               onSelect={(e) => {
-                setDropAddress({ ...dropAddress, text: e })
+                setDrop({ ...drop, text: e })
                 geocodeByAddress(e)
                   .then(results => getLatLng(results[0]))
                   .then(latLng => {
-                    setDropAddress({ ...dropAddress, text: e, latitude: latLng.lat, longitude: latLng.lng })
+                    setDrop({ ...drop, text: e, latitude: latLng.lat, longitude: latLng.lng })
                   })
                   .catch(error => console.error('Error', error));
               }}
@@ -227,6 +350,11 @@ const CreateOrder = () => {
               )}
             </PlacesAutocomplete>
           </div>
+          <div className='grid grid-cols-3 gap-x-4'>
+            <Input onChange={(e) => { setDrop({ ...drop, building: e.target.value }) }} value={drop.building} label={"Building"} type={"text"} placeholder={"Enter your building name"} id={"building"} />
+            <Input onChange={(e) => { setDrop({ ...drop, floor: e.target.value }) }} value={drop.floor} label={"Floor"} type={"text"} placeholder={"Enter your floor no."} id={"floor"} />
+            <Input onChange={(e) => { setDrop({ ...drop, flatno: e.target.value }) }} value={drop.flatno} label={"Flat no."} type={"text"} placeholder={"Enter your flat no."} id={"flatno"} />
+          </div>
           <Input onChange={(e) => { setDrop({ ...drop, phone_number: e.target.value }) }} value={drop.phone_number} label={"Mobile Number"} type={"text"} placeholder={"Enter your 10 digit mobile number"} id={"phone_number"} />
           <Input onChange={(e) => { setDrop({ ...drop, instructions: e.target.value }) }} value={drop.instructions} label={"Instructions"} type={"text"} placeholder={"Instructions"} id={"instructions"} />
         </div>
@@ -245,37 +373,62 @@ const CreateOrder = () => {
         {/* seventh box */}
         <div className='border-accentYellow border-2 bg-white lg:w-[80%] w-full h-auto flex flex-col gap-6 my-4 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
           <h1 className='text-xl'>Insurance of Parcel</h1>
-          <div className='flex lg:flex-row flex-col w-full lg:gap-10 gap-3 items-end'>
+          <div className='flex flex-col w-full gap-3 items-end'>
             <Input onChange={handleChange} value={formState.parcel_value} label={"Parcel Value"} type={"number"} placeholder={"Enter the cost of the parcel"} id={"parcel_value"} />
-            <p className='lg:w-[70%] w-full'>Rs- 100 Additional insurance charges applied</p>
+            <p className='w-full'>Rs - 100 Additional insurance charges applied</p>
           </div>
           <Input onChange={handleChange} value={formState.phone_number} label={"Phone Number"} type={"text"} placeholder={"Enter phone number"} id={"phone_number"} />
-          <p className='lg:text-center text-left'>Secure any delicate or crucial packages so that you may recover the value in the event that they are lost or damaged during delivery. For this, we charge a fee equal to 0.85% of the amount you declare above plus GST (in addition to the shipping price). Good for up to Rs 50,000.</p>
+          <p className='text-justify'>Secure any delicate or crucial packages so that you may recover the value in the event that they are lost or damaged during delivery. For this, we charge a fee equal to 0.85% of the amount you declare above plus GST (in addition to the shipping price). Good for up to Rs 50,000.</p>
         </div>
 
         {/* eight box */}
-        <div className='border-accentYellow border-2 bg-white lg:w-[80%] w-full h-auto flex flex-col gap-6 my-4 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
+        <div className='border-accentYellow border-2 bg-white lg:w-[80%] w-full h-auto hidden flex-col gap-6 my-4 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
           <h1 className='text-xl'>Additional Serivices</h1>
+        </div>
 
+        <div className='border-accentYellow border-2 bg-white lg:w-[80%] w-full h-auto flex flex-col gap-6 my-4 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
+          <h1 className='text-xl font-bold'>Additional Services</h1>
+
+          <h3 className='mt-3 font-semibold'>Select Shipping</h3>
+          <div className='grid grid-cols-2 gap-6'>
+            <div onClick={() => { setFormState({ ...formState, vehicle: "scooty" }) }} className={formState.vehicle === "scooty" ? 'cursor-pointer bg-white p-4 border-2 border-accentYellow rounded-xl flex gap-3 items-center' : 'cursor-pointer bg-white p-4 border-2 rounded-xl flex gap-3 items-center'}>
+              <div className='h-16 w-16 bg-accentYellow/20 flex items-center justify-center rounded-xl'>
+                <img src="/assets/icons/scooty.svg" className='h-7' alt="" />
+              </div>
+              <div>
+                <h3 className='font-semibold'>Scooter</h3>
+                <p>For high capacity delivery</p>
+              </div>
+            </div>
+            <div onClick={() => { setFormState({ ...formState, vehicle: "bike" }) }} className={formState.vehicle === "bike" ? 'cursor-pointer bg-white p-4 border-2 border-accentYellow rounded-xl flex gap-3 items-center' : 'cursor-pointer bg-white p-4 border-2 rounded-xl flex gap-3 items-center'}>
+              <div className='h-16 w-16 bg-accentYellow/20 flex items-center justify-center rounded-xl'>
+                <img src="/assets/icons/bike.svg" className='h-8' alt="" />
+              </div>
+              <div>
+                <h3 className='font-semibold'>Bike</h3>
+                <p>For low capacity delivery</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* nineth box */}
         <div className='border-accentYellow border-2 bg-white lg:w-[80%] w-full h-auto flex flex-col gap-6 my-4 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
           <h1 className='text-xl text-left w-full'>Payment Type</h1>
-          <div className='w-[60%] flex justify-between '>
-            <button type='button' onClick={() => { setFormState({ ...formState, payment_method: "cod" }) }} className={formState?.payment_method === "cod" ? 'outline-none rounded-xl px-7 py-2 bg-accentYellow border-accentYellow border-2 hover:shadow-md duration-200 ' : 'outline-none rounded-xl px-7 py-2 border-accentYellow border-2 hover:shadow-md duration-200 '}>Cash</button>
-            <button type='button' disabled onClick={() => { setFormState({ ...formState, payment_method: "cod" }) }} className={formState?.payment_method === "upi" ? 'outline-none rounded-xl px-7 py-2 bg-accentYellow border-accentYellow border-2 hover:shadow-md duration-200 ' : 'outline-none rounded-xl px-7 py-2 border-accentYellow border-2 hover:shadow-md duration-200 '}>UPI</button>
-            <button type='button' disabled onClick={() => { setFormState({ ...formState, payment_method: "cod" }) }} className={formState?.payment_method === "card" ? 'outline-none rounded-xl px-7 py-2 bg-accentYellow border-accentYellow border-2 hover:shadow-md duration-200 ' : 'outline-none rounded-xl px-7 py-2 border-accentYellow border-2 hover:shadow-md duration-200 '}>Card</button>
+          <div className='w-[60%] flex justify-start gap-6' >
+            <button type='button' onClick={() => { setPayment("cod") }} className={payment === "cod" ? 'outline-none rounded-xl px-7 py-2 bg-accentYellow border-accentYellow border-2 hover:shadow-md duration-200 ' : 'outline-none rounded-xl px-7 py-2 border-accentYellow border-2 hover:shadow-md duration-200 '}>Cash</button>
+            <button type='button' onClick={() => { setPayment("online") }} className={payment === "online" ? 'outline-none rounded-xl px-7 py-2 bg-accentYellow border-accentYellow border-2 hover:shadow-md duration-200 ' : 'outline-none rounded-xl px-7 py-2 border-accentYellow border-2 hover:shadow-md duration-200 '}>Online</button>
           </div>
         </div>
 
         {/* tenth box */}
         <div className='border-accentYellow border-2 bg-white lg:w-[80%] w-full h-auto flex flex-col gap-6 my-4 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
-          <h1 className='text-lg flex items-center'>Order Amount - ₹144</h1>
+          <Button onClick={calculateRate} type="button" text={"Calculate Fare"} className={"py-3"} />
+          <h1 className='text-lg flex items-center'>Order Amount - ₹{(distance * priceData?.additional_per_kilometer_charge).toFixed(2)}</h1>
           {/* <span className='absolute right-10 top-5 text-lg'><IoIosArrowDown /></span> */}
         </div>
 
-        <Button onClick={handleSubmit} type="button" text={"Confirm Order"} className={"mt-14 mb-6 py-3"} />
+        <Button onClick={handlePayment} type="button" text={"Confirm Order"} className={"mt-14 mb-6 py-3"} />
 
         <div className='border-accentYellow border-2 bg-white lg:w-[80%] w-full h-auto flex flex-col lg:text-center text-left gap-6 my-4 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
           <p>Clicking "Submit order" sends your request to the couriers and signifies your acceptance of the terms of the agreements as well as our terms and conditions.</p>
