@@ -15,24 +15,24 @@ const Navbar = ({ comingsoon = false }) => {
 						<img src="/assets/logo/logo.png" alt="" />
 					</nav>
 					:
-					<nav className='px-10 flex lg:justify-between justify-center items-center shadow-lg shadow-[#0000000e] w-[90vw] bg-white rounded-b-3xl h-[90px] absolute left-1/2 -translate-x-1/2'>
+					<nav className='px-10 flex  lg:flex-row flex-col lg:justify-between justify-center items-center shadow-lg shadow-[#0000000e] w-[90vw] bg-white rounded-b-3xl h-[90px] absolute left-1/2 -translate-x-1/2'>
 						<img src="/assets/logo/logo.png" alt="" />
-						<div className='w-7/12 h-full lg:flex hidden items-center justify-between'>
-							<div className='flex gap-16'>
+						<div className='w-7/12 h-full flex items-center justify-between'>
+							<div className='lg:flex gap-16 hidden'>
 								<Link to={"/"}>Home</Link>
 								<Link to={"/create-order"}>Create Order</Link>
 								<Link to={"/about-us"}>About us</Link>
 							</div>
 							<div className='flex gap-7 items-center'>
-								{!localStorage.getItem("token") && <Button filled={true} text={"SignIn"} onClick={() => setShowSigninModal(true)}/>}
+								{!localStorage.getItem("token") && <Button filled={true} text={"SignIn"} onClick={() => setShowSigninModal(true)} />}
 								{/* {!localStorage.getItem("token") && <Button text={"SignUp"} onClick={handleSignin}/>} */}
-								{localStorage.getItem("token") && <button onClick={() => {localStorage.removeItem("token"); window.location.reload()}}>Logout</button>}
+								{localStorage.getItem("token") && <button onClick={() => { localStorage.removeItem("token"); window.location.reload() }}>Logout</button>}
 								{/* <Button onClick={handleSignUp} text={"Register "} className={'w-32'} /> */}
 							</div>
 						</div>
 					</nav>
 			}
-			<Signin showSigninModal={showSigninModal} setShowSigninModal={setShowSigninModal}/>
+			<Signin showSigninModal={showSigninModal} setShowSigninModal={setShowSigninModal} />
 		</>
 	)
 }

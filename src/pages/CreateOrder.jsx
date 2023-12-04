@@ -390,7 +390,7 @@ const CreateOrder = () => {
           <h1 className='text-xl font-bold'>Additional Services</h1>
 
           <h3 className='mt-3 font-semibold'>Select Shipping</h3>
-          <div className='grid grid-cols-2 gap-6'>
+          <div className='grid lg:grid-cols-2 grid-cols-1 gap-6'>
             <div onClick={() => { setFormState({ ...formState, vehicle: "scooty" }) }} className={formState.vehicle === "scooty" ? 'cursor-pointer bg-white p-4 border-2 border-accentYellow rounded-xl flex gap-3 items-center' : 'cursor-pointer bg-white p-4 border-2 rounded-xl flex gap-3 items-center'}>
               <div className='h-16 w-16 bg-accentYellow/20 flex items-center justify-center rounded-xl'>
                 <img src="/assets/icons/scooty.svg" className='h-7' alt="" />
@@ -416,7 +416,7 @@ const CreateOrder = () => {
         <div className='border-accentYellow border-2 bg-white lg:w-[80%] w-full h-auto flex flex-col gap-6 my-4 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
           <h1 className='text-xl text-left w-full'>Payment Type</h1>
           <div className='w-[60%] flex justify-start gap-6' >
-            <button type='button' onClick={() => { setPayment("cod") }} className={payment === "cod" ? 'outline-none rounded-xl px-7 py-2 bg-accentYellow border-accentYellow border-2 hover:shadow-md duration-200 ' : 'outline-none rounded-xl px-7 py-2 border-accentYellow border-2 hover:shadow-md duration-200 '}>Cash</button>
+            {/* <button type='button' onClick={() => { setPayment("cod") }} className={payment === "cod" ? 'outline-none rounded-xl px-7 py-2 bg-accentYellow border-accentYellow border-2 hover:shadow-md duration-200 ' : 'outline-none rounded-xl px-7 py-2 border-accentYellow border-2 hover:shadow-md duration-200 '}>Cash</button> */}
             <button type='button' onClick={() => { setPayment("online") }} className={payment === "online" ? 'outline-none rounded-xl px-7 py-2 bg-accentYellow border-accentYellow border-2 hover:shadow-md duration-200 ' : 'outline-none rounded-xl px-7 py-2 border-accentYellow border-2 hover:shadow-md duration-200 '}>Online</button>
           </div>
         </div>
