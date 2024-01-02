@@ -79,9 +79,9 @@ const CreateOrder = () => {
             }
           })
             .then((res) => {
-              if(res.data.error){
+              if (res.data.error) {
                 alert("Something went wrong")
-              }else{
+              } else {
                 alert(res.data.message)
               }
             })
@@ -234,6 +234,11 @@ const CreateOrder = () => {
           <div className='w-full flex flex-col items-start'>
             <label htmlFor={"i"} className='pb-1 lg:text-base text-sm' >{"Pickup Address"}</label>
             <PlacesAutocomplete
+              searchOptions={{
+                componentRestrictions: {
+                  country: ['in']
+                }
+              }}
               value={pickup.text}
               onChange={(e) => {
                 setPickup({ ...pickup, text: e })
@@ -300,6 +305,11 @@ const CreateOrder = () => {
           <div className='w-full flex flex-col items-start'>
             <label htmlFor={"i"} className='pb-1 text-sm lg:text-base' >{"Drop Address"}</label>
             <PlacesAutocomplete
+              searchOptions={{
+                componentRestrictions: {
+                  country: ['in']
+                }
+              }}
               value={drop.text}
               onChange={(e) => {
                 setDrop({ ...drop, text: e })

@@ -105,6 +105,11 @@ const Home = () => {
 									<label className='font-medium pb-2 text-lg' htmlFor="">Pickup point:</label>
 								</div>
 								<PlacesAutocomplete
+									searchOptions={{
+										componentRestrictions: {
+											country: ['in']
+										}
+									}}
 									value={pickupAddress.text}
 									onChange={(e) => {
 										setPickupAddress({ ...pickupAddress, text: e })
@@ -114,7 +119,6 @@ const Home = () => {
 										geocodeByAddress(e)
 											.then(results => getLatLng(results[0]))
 											.then(latLng => {
-												console.log({ ...pickupAddress, text: e, latitude: latLng.lat, longitude: latLng.lng })
 												setPickupAddress({ ...pickupAddress, text: e, latitude: latLng.lat, longitude: latLng.lng })
 											})
 											.catch(error => console.error('Error', error));
@@ -136,7 +140,6 @@ const Home = () => {
 													const className = suggestion.active
 														? 'suggestion-item--active px-3 py-3'
 														: 'suggestion-item px-3 py-3';
-													// inline style for demonstration purpose
 													const style = suggestion.active
 														? { backgroundColor: '#eee', cursor: 'pointer' }
 														: { backgroundColor: '#ffffff', cursor: 'pointer' };
@@ -167,6 +170,11 @@ const Home = () => {
 								</div>
 								<PlacesAutocomplete
 									value={dropAddress.text}
+									searchOptions={{
+										componentRestrictions: {
+											country: ['in']
+										}
+									}}
 									onChange={(e) => {
 										setDropAddress({ ...dropAddress, text: e })
 									}}
@@ -226,10 +234,10 @@ const Home = () => {
 						</div>
 					</div>
 				</div>
-			</section>
+			</section >
 
 			{/* Send your parcel Hassel-free!! section-4 pending*/}
-			<section className='h-screen w-full relative Poppins hidden flex-col border-b-2 px-28 py-9'>
+			<section section className='h-screen w-full relative Poppins hidden flex-col border-b-2 px-28 py-9' >
 				<img src="/assets/BG/bg-shape-6.png" className='absolute left-0 bottom-[63%] z-0' alt="" />
 				<div className='bg-[gradient-bg] w-full h-full'>
 					<h1>Send your parcel Hassel-free!!</h1>
@@ -238,10 +246,10 @@ const Home = () => {
 						<li>Contactless Delivery- Customers can request contactless delivery, which does not require signatures.</li>
 					</ul>
 				</div>
-			</section>
+			</section >
 
 			{/* Bulk Order section-5 */}
-			<section className='h-auto w-full relative Poppins flex flex-col border-b-2 px-5 md:px-28 py-9 pb-12'>
+			<section section className='h-auto w-full relative Poppins flex flex-col border-b-2 px-5 md:px-28 py-9 pb-12' >
 				<img src="/assets/BG/bg-shape-7.png" className='absolute right-80 bottom-96 z-0' alt="" />
 				<h1 className='pb-4 text-3xl md:text-5xl font-semibold'>Bulk Order</h1>
 				<div className='shadow-xl md:flex hidden bg-accentYellow z-50 rounded-3xl px-6 py-12 relative'>
@@ -272,10 +280,10 @@ const Home = () => {
 						}} text={"Give a call"} className={"mt-3 text-accentYellow bg-white"} />
 					</div>
 				</div>
-			</section>
+			</section >
 
 			{/* We know how assist with any kind of business. Section-2 */}
-			<section className='h-auto w-full relative Poppins flex flex-col border-b-2 px-5 md:px-28'>
+			<section section className='h-auto w-full relative Poppins flex flex-col border-b-2 px-5 md:px-28' >
 				<img src="/assets/BG/bg-shape-3.png" className='absolute bottom-4 left-0 hidden md:block w-[80%] h-[100%] z-0' alt="" />
 				<img src="/assets/BG/bg-shape-4.png" className='absolute top-16 right-16 h-[200px] aspect-square md:h-[27%] md:w-[14%] z-0' alt="" />
 				<h1 className='z-50 text-3xl md:text-5xl leading-tight pt-9 font-semibold mb-3'>We know how assist with <br className='md:block hidden' /> any kind of business.</h1>
@@ -312,10 +320,10 @@ const Home = () => {
 					</div>
 
 				</div>
-			</section>
+			</section >
 
 			{/* Brands section-6 */}
-			<section className='h-auto w-full relative Poppins hidden flex-col border-b-2 px-28 py-12'>
+			<section section className='h-auto w-full relative Poppins hidden flex-col border-b-2 px-28 py-12' >
 				<img src="/assets/BG/bg-shape-8.png" className='absolute right-0 top-[60%] z-0 ' alt="" />
 				<div className='brands-gradient border-[#F2F3D4] border-4 rounded-3xl p-12 px-24 flex flex-col items-center z-50'>
 					<h1 className='pb-4 text-3xl md:text-5xl font-semibold'>Serving the brands like</h1>
@@ -340,10 +348,10 @@ const Home = () => {
 						</div>
 					</div>
 				</div>
-			</section>
+			</section >
 
 			{/* Become a courier section-7 */}
-			<section className='h-auto w-full relative Poppins lg:flex hidden flex-col border-b-2 px-28 py-12 pt-20'>
+			<section section className='h-auto w-full relative Poppins lg:flex hidden flex-col border-b-2 px-28 py-12 pt-20' >
 				<img src="/assets/BG/bg-shape-10.png" className='absolute left-0 top-0 z-0 h-72' alt="" />
 				<div className='shadow-xl h-[14rem] items-center gap-5 md:flex justify-around flex w-full bg-accentYellow z-50 rounded-3xl px-6 relative'>
 					<div className='w-3/12 self-end'>
@@ -363,7 +371,7 @@ const Home = () => {
 						<Button text={"Register Now"} className={"text-accentYellow bg-white"} />
 					</div>
 				</div>
-			</section>
+			</section >
 
 			<section className='h-auto w-full relative Poppins lg:hidden flex flex-col border-b-2 px-5 py-8 pt-20'>
 				<div className='relative bg-accentYellow p-5 w-full h-auto rounded-3xl'>
