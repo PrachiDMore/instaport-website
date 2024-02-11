@@ -252,7 +252,7 @@ const CreateOrder = () => {
     <>
       <section className='h-auto w-screen Poppins flex flex-col bg-[#fafae0]'>
         <Navbar />
-        <form onSubmit={handlePayment} className='h-auto w-screen flex flex-col items-center lg:px-24 px-5 lg:text-left text-center relative'>
+        <div className='h-auto w-screen flex flex-col items-center lg:px-24 px-5 lg:text-left text-center relative'>
           <div className='w-full flex lg:justify-start justify-center'>
             <h1 className='text-3xl md:text-5xl pt-36 font-semibold mb-3 self-start lg:text-left text-center'>Create an Order</h1>
           </div>
@@ -691,7 +691,7 @@ const CreateOrder = () => {
               <div className='flex justify-center items-center'><Button type="button" onClick={handlePayment} text={"Place Order"} className={"mx-auto"} /></div>
             </div>
           </section>
-        </form>
+        </div>
         <Footer />
 
       </section>
