@@ -33,7 +33,7 @@ const Home = () => {
 						const route = response.routes[0];
 						if (route && route.legs && route.legs.length > 0) {
 							setDistance((route.legs[0].distance.value / 1000).toFixed(2));
-							axios("https://insta-port-backend-api.vercel.app/price/get", {
+							axios("https://instaport-backend-main.vercel.app/price/get", {
 								method: "GET"
 							})
 								.then((res) => {
@@ -229,7 +229,7 @@ const Home = () => {
 								<Button onClick={calculateRate} text={"Calculate"} />
 							</div>
 							{pricingData && <div className='flex justify-center'>
-								<div className='w-max mt-4 px-5 py-2 rounded-full border-2 border-accentYellow bg-white'>Fare: {(distance * Number(pricingData?.per_kilometer_charge)).toFixed(2)}</div>
+								<div className='w-max mt-4 px-5 py-2 rounded-full border-2 border-accentYellow bg-white'>Fare: {(distance * Number(pricingData?.per_kilometer_charge)).toFixed(2)}Rs</div>
 							</div>}
 						</div>
 					</div>
