@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import { FiCalendar } from 'react-icons/fi'
+import { FiCalendar, FiTrash, FiTrash2 } from 'react-icons/fi'
 import { LuClock3 } from 'react-icons/lu'
 import Input from '../components/Input'
 import { IoIosArrowDown, IoIosClose } from 'react-icons/io'
@@ -248,6 +248,18 @@ const CreateOrder = () => {
         setAmount(finalAmount)
       })
   }
+
+  const handleRemove = (dropIndex) => {
+    let confirm = window.confirm("Are you sure you want to delete the drop point?");
+    if (confirm) {
+      let data = droplocations.filter((value, index) => {
+        return index != dropIndex
+      });
+      setDroplocations(data);
+    }else{
+      return
+    }
+  }
   return (
     <>
       <section className='h-auto w-screen Poppins flex flex-col bg-[#fafae0]'>
@@ -450,7 +462,10 @@ const CreateOrder = () => {
           {
             droplocations?.map((droplocation, index) => {
               return <div className='border-accentYellow border-2 bg-white lg:w-[80%] w-full h-auto flex flex-col lg:gap-3 gap-3 my-4 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
-                <h1 className='text-xl mb-1 font-bold'>Drop Point {index + 2}</h1>
+                <div className='flex justify-between'>
+                  <h1 className='text-xl mb-1 font-bold'>Drop Point {index + 2}</h1>
+                  <span onClick={() => handleRemove(index)} className='flex justify-center items-center h-7 w-7 bg-red-500 text-xl mb-1 font-bold text-white rounded-md cursor-pointer'><FiTrash2 className='text-lg' /></span>
+                </div>
                 <div className='w-full flex flex-col items-start'>
                   <label htmlFor={"droppoint"} className='pb-1 text-sm lg:text-base' >{"Drop Address"}</label>
                   <PlacesAutocomplete
