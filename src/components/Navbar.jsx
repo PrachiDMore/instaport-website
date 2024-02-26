@@ -11,11 +11,11 @@ const Navbar = ({ comingsoon = false }) => {
 		<>
 			{
 				comingsoon ?
-					<nav className='px-10 flex justify-center items-center shadow-lg shadow-[#0000000e] w-[90vw] bg-white rounded-b-3xl h-[90px]'>
+					<nav className='px-10 flex justify-center items-center shadow-lg shadow-[#0000000e] w-[90vw] bg-white rounded-b-3xl h-[90px] z-50'>
 						<img src="/assets/logo/logo.png" alt="" />
 					</nav>
 					:
-					<nav className='px-10 flex  lg:flex-row flex-col lg:justify-between justify-center items-center shadow-lg shadow-[#0000000e] w-[90vw] bg-white rounded-b-3xl h-[90px] absolute left-1/2 -translate-x-1/2'>
+					<nav className='px-10 flex  lg:flex-row flex-col lg:justify-between justify-center items-center shadow-lg shadow-[#0000000e] w-[90vw] bg-white rounded-b-3xl h-[90px] absolute left-1/2 -translate-x-1/2 z-50'>
 						<img src="/assets/logo/logo.png" alt="" />
 						<div className='w-7/12 h-full flex items-center justify-between'>
 							<div className='lg:flex gap-16 hidden'>

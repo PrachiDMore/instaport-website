@@ -16,6 +16,7 @@ import {
 import PlacesAutocomplete from 'react-places-autocomplete';
 import { useRef } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 
 const CreateOrder = () => {
@@ -53,6 +54,7 @@ const CreateOrder = () => {
   const [payment, setPayment] = useState("cod")
   const [droplocations, setDroplocations] = useState([]);
   const [amount, setAmount] = useState(0.0);
+  const [showNote, setShowNote] = useState(false);
 
   useEffect(() => {
     axios("https://instaport-backend-main.vercel.app/price/get", {
@@ -87,7 +89,7 @@ const CreateOrder = () => {
                 console.log(res.data)
               } else {
                 alert(res.data.message)
-                window.location.reload();
+                setShowNote(true)
               }
             })
             .catch((err) => {
@@ -116,7 +118,7 @@ const CreateOrder = () => {
             console.log(res.data)
           } else {
             alert(res.data.message)
-            window.location.reload();
+            setShowNote(true)
           }
         })
         .catch((err) => {
@@ -238,13 +240,13 @@ const CreateOrder = () => {
             }
           }
         } else {
-          if (mainDistance < 4.0) {
+          if (mainDistance < 1.0) {
             price = priceData?.base_order_charges
           } else {
             price = priceData?.per_kilometer_charge * mainDistance
           }
         }
-        let finalAmount = formState.parcel_weight === weight[0] || formState.parcel_weight == weight[1] ? price : formState.parcel_weight === weight[2] ? price + 50 : formState.parcel_weight === weight[3] ? price + 100 : price + 150
+        let finalAmount = formState.parcel_weight === weight[0] || formState.parcel_weight == weight[1] ? price + priceData?.base_order_charges : formState.parcel_weight === weight[2] ? price + 50 + priceData?.base_order_charges : formState.parcel_weight === weight[3] ? price + 100 + priceData?.base_order_charges : price + 150 + priceData?.base_order_charges
         setAmount(finalAmount)
       })
   }
@@ -256,13 +258,13 @@ const CreateOrder = () => {
         return index != dropIndex
       });
       setDroplocations(data);
-    }else{
+    } else {
       return
     }
   }
   return (
     <>
-      <section className='h-auto w-screen Poppins flex flex-col bg-[#fafae0]'>
+      <section id='main' className='h-auto w-screen Poppins flex flex-col bg-[#fafae0]'>
         <Navbar />
         <div className='h-auto w-screen flex flex-col items-center lg:px-24 px-5 lg:text-left text-center relative'>
           <div className='w-full flex lg:justify-start justify-center'>
@@ -666,26 +668,28 @@ const CreateOrder = () => {
             {/* <span className='absolute right-10 top-5 text-lg'><IoIosArrowDown /></span> */}
           </div>
 
-          <Button onClick={() => { setShow(true); fetchDistanceAndCost() }} type="button" text={"Place Order"} className={"mt-14 mb-6 py-3"} />
+          <Button onClick={() => { }} type="button" text={"Place Order"} className={"mt-14 mb-6 py-3"} />
+          {/* <Button onClick={() => { setShow(true); fetchDistanceAndCost() }} type="button" text={"Place Order"} className={"mt-14 mb-6 py-3"} /> */}
 
-          <div className='border-accentYellow border-2 bg-white lg:w-[80%] w-full h-auto flex flex-col lg:text-center text-left gap-6 my-4 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
+          <div className='border-accentYellow border-2 bg-white lg:w-[80%] w-full h-auto flex flex-col lg:text-center text-left my-4 gap-2 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
             <p>Clicking "Submit order" sends your request to the couriers and signifies your acceptance of the terms of the agreements as well as our terms and conditions.</p>
-            <p>After submitting an order, SMS alerts can be configured.</p>
-            <p className='my-3'>Simple steps to order a delivery boy are as follows:</p>
+            <p className='mt-2'>After submitting an order, SMS alerts can be configured.</p>
+            <p className='mt-3 font-semibold'>Simple steps to order a delivery boy are as follows:</p>
             <p>Please give us the following information: addresses, contact information for each address, preferred delivery time, and delivery weight.</p>
             <p>Click "Submit order" if you agree with our quote.</p>
             <p>Get a call from the delivery lad who will be delivering your purchase. Negotiate a price at which he will be compensated. Give him further information about your package and the method you want.</p>
             <p>If you have any questions, contact us by message or phone our operator. By selecting the 'Order' option, you will receive the Operator's phone number, save it together with the order number.</p>
             <p>Have your delivery done. Give the courier his signature directly on his smartphone's screen to confirm everything was done correctly. To assist us in selecting the very best couriers, you can evaluate a courier once the delivery is complete.</p>
             <p className='mt-3'>Many thanks, Team Instaport</p>
+            <p className=''>Regards, Mahesh Chorotiya</p>
           </div>
 
-          <Button type="button" text={"Scroll to top"} className={"my-4 py-3"} />
+          <a href={"#main"} ><Button type="button" text={"Scroll to top"} className={"my-4 py-3"} /></a>
 
-          <div className='border-y-2 border-gray-200 w-full flex flex-col py-9 mt-3 gap-4 justify-center items-center'>
+          {/* <div className='border-y-2 border-gray-200 w-full flex flex-col py-9 mt-3 gap-4 justify-center items-center'>
             <p>We are open to feedback, Please give your valuable feedback at the Link given below</p>
             <Button type="button" text={"Give Feedback"} className={"py-3"} />
-          </div>
+          </div> */}
 
 
           <section className={show ? 'flex justify-center items-center z-[5000] fixed top-0 left-0 bg-black/40 h-screen w-screen opacity-100 duration-200 pointer-events-auto' : 'z-[5000] fixed top-0 left-0 bg-black/40 h-screen w-screen opacity-0 duration-200 pointer-events-none flex justify-center items-center '}>
@@ -708,6 +712,25 @@ const CreateOrder = () => {
           </section>
         </div>
         <Footer />
+
+        <div className={showNote ? 'fixed top-0 left-0 h-screen w-screen flex items-center justify-center z-[60] bg-black/40 opacity-100 duration-100 pointer-events-auto' : 'duration-100 pointer-events-none opacity-0 fixed top-0 left-0 h-screen w-screen flex items-center justify-center z-[60] bg-black/40'}>
+          <div className='p-4 rounded-lg bg-white lg:w-[40vw] w-[80vw]'>
+            <div className='flex justify-between items-center'>
+              <h1 className='text-xl text-left w-full font-bold'>Note</h1>
+              <span className='cursor-pointer bg-gray-50 hover:bg-gray-100 duration-200 h-8 w-8 flex justify-center items-center rounded-md' onClick={() => {
+                setShowNote(false);
+                window.location.reload();
+              }}><IoIosClose className='text-3xl' /></span>
+            </div>
+            <div className='py-2 flex flex-col'>
+              <h2>For better experience download our app.</h2>
+              <div className='flex items-center mt-3 gap-4'>
+                <img src="/assets/footer/appstore.png" alt="" />
+                <img src="/assets/footer/playstore.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
 
       </section>
     </>
