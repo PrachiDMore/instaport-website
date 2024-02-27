@@ -36,6 +36,20 @@ const CreateOrder = () => {
     'date': "",
     'time': "",
   }
+
+  function formatPhoneNumber(input) {
+    const numericInput = input.replace(/\D/g, '');
+
+    let formattedNumber = "+91 ";
+
+    if (numericInput.length > 7) {
+      formattedNumber += numericInput.slice(2, 7) + " " + numericInput.slice(7, 12);
+    } else if (numericInput.length > 2) {
+      formattedNumber += numericInput.slice(2, 7);
+    }
+    return formattedNumber.trim();
+  }
+
   const [pickup, setPickup] = useState(addressInitialState)
   const [drop, setDrop] = useState(addressInitialState)
   const [show, setShow] = useState(false);
@@ -57,6 +71,9 @@ const CreateOrder = () => {
   const [showNote, setShowNote] = useState(false);
 
   useEffect(() => {
+    if(localStorage.getItem("token") == "" || localStorage.getItem("token") == undefined || localStorage.getItem("token") == null){
+      alert("Please Login to your account!");
+    }
     axios("https://instaport-backend-main.vercel.app/price/get", {
       method: "GET"
     })
@@ -192,7 +209,6 @@ const CreateOrder = () => {
               return (route.legs[0].distance.value / 1000).toFixed(2);
             }
           } else {
-            alert('Directions request failed due to ' + status);
             return 0;
           }
         }
@@ -246,8 +262,12 @@ const CreateOrder = () => {
             price = priceData?.per_kilometer_charge * mainDistance
           }
         }
-        let finalAmount = formState.parcel_weight === weight[0] || formState.parcel_weight == weight[1] ? price + priceData?.base_order_charges : formState.parcel_weight === weight[2] ? price + 50 + priceData?.base_order_charges : formState.parcel_weight === weight[3] ? price + 100 + priceData?.base_order_charges : price + 150 + priceData?.base_order_charges
-        setAmount(finalAmount)
+        let finalAmount = formState.parcel_weight === weight[0] || formState.parcel_weight == weight[1] ? price : formState.parcel_weight === weight[2] ? price + 50 + priceData?.base_order_charges : formState.parcel_weight === weight[3] ? price + 100 + priceData?.base_order_charges : price + 150 + priceData?.base_order_charges
+        if (mainDistance == 0) {
+          setAmount(0)
+        } else {
+          setAmount(finalAmount)
+        }
       })
   }
 
@@ -378,7 +398,10 @@ const CreateOrder = () => {
               <Input onChange={(e) => { setPickup({ ...pickup, time: e.target.value }) }} value={pickup.time} label={"Time"} type={"time"} placeholder={"Enter your Time"} id={"time"} />
             </div>
             <div className='grid lg:grid-cols-2 gap-4'>
-              <Input onChange={(e) => { setPickup({ ...pickup, phone_number: e.target.value }) }} value={pickup.phone_number} label={"Mobile Number"} type={"text"} placeholder={"Enter your 10 digit mobile number"} id={"phone_number"} />
+              <Input onChange={(e) => {
+                let text = formatPhoneNumber(e.target.value)
+                setPickup({ ...pickup, phone_number: text })
+              }} value={pickup.phone_number} label={"Mobile Number"} type={"text"} placeholder={"Enter your 10 digit mobile number"} id={"phone_number"} />
               <Input onChange={(e) => { setPickup({ ...pickup, name: e.target.value }) }} value={pickup.name} label={"Name"} type={"text"} placeholder={"Enter your name"} id={"name"} />
             </div>
             <Input onChange={(e) => { setPickup({ ...pickup, instructions: e.target.value }) }} value={pickup.instructions} label={"Instructions"} type={"text"} placeholder={"Instructions"} id={"instructions"} />
@@ -455,7 +478,10 @@ const CreateOrder = () => {
               <Input onChange={(e) => { setDrop({ ...drop, time: e.target.value }) }} value={drop.time} label={"Time"} type={"time"} placeholder={"Enter your Time"} id={"time"} />
             </div>
             <div className='grid lg:grid-cols-2 gap-4'>
-              <Input onChange={(e) => { setDrop({ ...drop, phone_number: e.target.value }) }} value={drop.phone_number} label={"Mobile Number"} type={"text"} placeholder={"Enter your 10 digit mobile number"} id={"phone_number"} />
+              <Input onChange={(e) => {
+                let text = formatPhoneNumber(e.target.value)
+                setDrop({ ...drop, phone_number: text })
+              }} value={drop.phone_number} label={"Mobile Number"} type={"text"} placeholder={"Enter your 10 digit mobile number"} id={"phone_number"} />
               <Input onChange={(e) => { setDrop({ ...drop, name: e.target.value }) }} value={drop.name} label={"Name"} type={"text"} placeholder={"Enter your name"} id={"name"} />
             </div>
             <Input onChange={(e) => { setDrop({ ...drop, instructions: e.target.value }) }} value={drop.instructions} label={"Instructions"} type={"text"} placeholder={"Instructions"} id={"instructions"} />
@@ -584,7 +610,8 @@ const CreateOrder = () => {
                 <div className='grid lg:grid-cols-2 gap-4'>
                   <Input onChange={(e) => {
                     let obj = { ...droplocations[index] }
-                    obj.phone_number = e.target.value
+                    let text = formatPhoneNumber(e.target.value)
+                    obj.phone_number = text
                     let arr = [...droplocations];
                     arr[index] = obj;
                     setDroplocations(arr);
@@ -626,7 +653,13 @@ const CreateOrder = () => {
               <Input onChange={handleChange} value={formState.parcel_value} label={"Parcel Value"} type={"number"} placeholder={"Enter the cost of the parcel"} id={"parcel_value"} />
               <p className='w-full'>Rs - 100 Additional insurance charges applied</p>
             </div>
-            <Input onChange={handleChange} value={formState.phone_number} label={"Phone Number"} type={"text"} placeholder={"Enter phone number"} id={"phone_number"} />
+            <Input onChange={(e) => {
+              let text = formatPhoneNumber(e.target.value)
+              setFormState({
+                ...formState,
+                phone_number: text
+              })
+            }} value={formState.phone_number} label={"Phone Number"} type={"text"} placeholder={"Enter phone number"} id={"phone_number"} />
             <p className='text-justify'>Secure any delicate or crucial packages so that you may recover the value in the event that they are lost or damaged during delivery. For this, we charge a fee equal to 0.85% of the amount you declare above plus GST (in addition to the shipping price). Good for up to Rs 50,000.</p>
           </div>
 
@@ -668,7 +701,7 @@ const CreateOrder = () => {
             {/* <span className='absolute right-10 top-5 text-lg'><IoIosArrowDown /></span> */}
           </div>
 
-          <Button onClick={() => { }} type="button" text={"Place Order"} className={"mt-14 mb-6 py-3"} />
+          <Button onClick={() => { setShow(true); fetchDistanceAndCost() }} type="button" text={"Place Order"} className={"mt-14 mb-6 py-3"} />
           {/* <Button onClick={() => { setShow(true); fetchDistanceAndCost() }} type="button" text={"Place Order"} className={"mt-14 mb-6 py-3"} /> */}
 
           <div className='border-accentYellow border-2 bg-white lg:w-[80%] w-full h-auto flex flex-col lg:text-center text-left my-4 gap-2 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
@@ -681,7 +714,6 @@ const CreateOrder = () => {
             <p>If you have any questions, contact us by message or phone our operator. By selecting the 'Order' option, you will receive the Operator's phone number, save it together with the order number.</p>
             <p>Have your delivery done. Give the courier his signature directly on his smartphone's screen to confirm everything was done correctly. To assist us in selecting the very best couriers, you can evaluate a courier once the delivery is complete.</p>
             <p className='mt-3'>Many thanks, Team Instaport</p>
-            <p className=''>Regards, Mahesh Chorotiya</p>
           </div>
 
           <a href={"#main"} ><Button type="button" text={"Scroll to top"} className={"my-4 py-3"} /></a>

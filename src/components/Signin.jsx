@@ -7,6 +7,21 @@ const Signin = ({ showSigninModal, setShowSigninModal }) => {
   const [password, setPassword] = useState("")
   const [name, setName] = useState("")
   const [signin, setSignin] = useState(true);
+
+  function formatPhoneNumber(input) {
+    const numericInput = input.replace(/\D/g, '');
+  
+    let formattedNumber = "+91 ";
+  
+    if (numericInput.length > 7) {
+      formattedNumber += numericInput.slice(2, 7) + " " + numericInput.slice(7, 12);
+    } else if (numericInput.length > 2) {
+      formattedNumber += numericInput.slice(2, 7);
+    }
+    return formattedNumber.trim();
+  }
+  
+
   const handleSignin = (e) => {
     e.preventDefault()
     if (signin) {
@@ -73,7 +88,10 @@ const Signin = ({ showSigninModal, setShowSigninModal }) => {
                 </div>}
                 <div>
                   <label for="phone" class="block mb-2 text-sm font-medium text-gray-900">Your phone number</label>
-                  <Input onChange={(e) => setPhone(e.target.value)} type="text" name="phone" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@company.com" required={true} />
+                  <Input onChange={(e) => {
+                    let text = formatPhoneNumber(e.target.value);
+                    setPhone(text);
+                  }} type="text" value={phone} name="phone" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="+91 12345 67890" required={true} />
                 </div>
                 <div>
                   <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Your password</label>

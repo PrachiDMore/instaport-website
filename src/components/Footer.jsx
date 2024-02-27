@@ -2,6 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Footer = ({ className }) => {
+  const getYear = () => {
+    let date = new Date();
+    return date.getFullYear();
+  }
   return (
     <section className=''>
       <img src="/assets/BG/bg-shape-10.png" className='absolute z-0 h-[40%] w-[15%]' alt="" />
@@ -9,7 +13,7 @@ const Footer = ({ className }) => {
         <section className='mb-4 flex lg:flex-row lg:gap-x-10 flex-col'>
           <div className='w-full lg:w-1/3'>
             <img src="/assets/logo/logo.png" alt="" />
-            <p className='mt-3'>You can always rely on Instaport When you need to make a delivery, for something big or small or even lots of goods all in one go, Instaport Delivery is here for you.</p>
+            <p className='mt-3'>You can always rely on Instaport When you need to make a delivery, for something big or small or even lots of goods all in one go, Instaport Delivery is here for you. <br /> By MAHESH HARISH CHOROTIYA</p>
           </div>
           <div className='text-sm lg:w-2/3 w-full h-full lg:flex grid grid-cols-2 justify-start pt-7'>
             {/* <div className='h-full hidden flex-col items-center'>
@@ -46,7 +50,7 @@ const Footer = ({ className }) => {
             </div>
           </div>
         </section>
-        <div className='lg:text-base text-sm w-full py-4 border-t-2 flex justify-center items-center text-gray-600'>&#169; 2023 Instaport Delivery. All rights reserved.</div>
+        <div className='lg:text-base text-sm w-full py-4 border-t-2 flex justify-center items-center text-gray-600'>&#169; {getYear()} Instaport Delivery. All rights reserved.</div>
       </section>
     </section>
   )
