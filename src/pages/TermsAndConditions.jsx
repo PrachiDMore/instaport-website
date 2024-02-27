@@ -89,10 +89,10 @@ const TermsAndConditions = () => {
             <li>•	Any other or additional fees, including tolls, for remote places.</li>
             <li>•	Any liability or responsibility for any loss or damage, as a result of using the services provided by the company, or resulting from the company's failure to provide the services to the customer for any reason at all, including but not limited to the customer's failure to follow the voice instructions provided by the services, malfunction, partial or complete failure of any network terminal, data processing system, computer tele-transmission system, or telecommunications system, or other circumstances that may or may not be beyond the company's control or the control of any individual or entity involved in the aforementioned systems for any reason.</li>
             <li>• You have complied with applicable law.</li>
-          <p className='pb-2 pl-5'>Events outside of our control, including but not restricted to:  Natural disasters, such as earthquakes, cyclones, storms, flooding, fire, illness, fog, snow, or frost Third-party criminal activities, such as natural tragedies or disaster.</p>
-          <p className='pb-2 pl-5'>Force majeure encompasses several events such as war, epidemics, pandemics, accidents, public enemy acts, strikes, embargoes, airborne hazards, local disputes, or civil disturbances.</p>
-          <p className='pb-2 pl-5'>Disruptions to air or ground transportation networks on a national or local level, as well as mechanical issues with vehicles or equipment.</p>
-          <p className='pb-2 pl-5'>Potential flaws or innate immorality present in the shipment's contents. Arson and heaviness.</p>
+            <p className='pb-2 pl-5'>Events outside of our control, including but not restricted to:  Natural disasters, such as earthquakes, cyclones, storms, flooding, fire, illness, fog, snow, or frost Third-party criminal activities, such as natural tragedies or disaster.</p>
+            <p className='pb-2 pl-5'>Force majeure encompasses several events such as war, epidemics, pandemics, accidents, public enemy acts, strikes, embargoes, airborne hazards, local disputes, or civil disturbances.</p>
+            <p className='pb-2 pl-5'>Disruptions to air or ground transportation networks on a national or local level, as well as mechanical issues with vehicles or equipment.</p>
+            <p className='pb-2 pl-5'>Potential flaws or innate immorality present in the shipment's contents. Arson and heaviness.</p>
             <li>•	Your actions or inactions, or those of third parties, including: Your breaching your responsibilities under these terms and conditions, or any other person claiming an interest in the consignment causing you to breach these terms and conditions.</li>
             <li>•	The contents of the shipment, including any articles that are forbidden, hazardous goods, or valuables, even if you voluntarily gave the shipment to us without alerting, informing, or declaring it to us, or even if we may have accepted it in error.</li>
           </ul>
@@ -136,7 +136,7 @@ const TermsAndConditions = () => {
 
           <h1 className='text-xl font-semibold mt-4 self-start'>OFFICER OF GRIEVANCE</h1>
           <p className='pb-2'>The name and contact information of the Nodal/Grievance Officer is provided in accordance with the Consumer Protection (E-Commerce) Rules, 2020. If there are any grievances under the said Rules that may be relevant to the treatment of the said Rules or any grievances pertaining to Services being availed at INSTAPORT DELIVERY, the Authority may direct the request under the said Rules to the grievance officer or at the coordinates listed below.</p>
-
+          <p className='mt-3'>By MAHESH HARISH CHOROTIYA</p>
         </section>
       </div>
       <Footer />

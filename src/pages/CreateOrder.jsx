@@ -17,10 +17,11 @@ import PlacesAutocomplete from 'react-places-autocomplete';
 import { useRef } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-
+import { ref, set } from "firebase/database";
+import { db } from "../config";
 
 const CreateOrder = () => {
-
+  const [paymentAddress, setPaymentAddress] = useState();
   const weight = ['0-1 kg', '1-5 kg', '5-10 kg', '10-15 kg', '15-20 kg'];
   const addressInitialState = {
     'text': '',
@@ -96,7 +97,7 @@ const CreateOrder = () => {
         .then((res) => {
           axios("https://instaport-backend-main.vercel.app/order/create", {
             method: "POST",
-            data: { ...formState, pickup: pickup, drop: drop, amount: res.data.transaction.amount, payment_method: res.data.transaction.payment_method_type, status: "new", droplocations: droplocations, commission: priceData?.instaport_commission },
+            data: { ...formState, pickup: pickup, drop: drop, amount: res.data.transaction.amount, payment_method: res.data.transaction.payment_method_type, status: "new", droplocations: droplocations, commission: priceData?.instaport_commission, payment_address: paymentAddress },
             headers: {
               "Authorization": `Bearer ${localStorage.getItem("token")}`
             }
@@ -105,6 +106,7 @@ const CreateOrder = () => {
               if (res.data.error) {
                 console.log(res.data)
               } else {
+                set(ref(db, 'orders/' + res.data.order._id), res.data.order);
                 alert(res.data.message)
                 setShow(false)
                 setShowNote(true)
@@ -126,7 +128,7 @@ const CreateOrder = () => {
     if (payment === "cod") {
       axios("https://instaport-backend-main.vercel.app/order/create", {
         method: "POST",
-        data: { ...formState, pickup: pickup, drop: drop, amount: amount, payment_method: "cod", status: "new", droplocations: droplocations, commission: priceData?.instaport_commission },
+        data: { ...formState, pickup: pickup, drop: drop, amount: amount, payment_method: "cod", status: "new", droplocations: droplocations, commission: priceData?.instaport_commission, payment_address: paymentAddress },
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
@@ -257,14 +259,19 @@ const CreateOrder = () => {
               price += gap * priceData.additional_per_kilometer_charge
             }
           }
+          if (distance < 1.0) {
+            price = priceData?.base_order_charges
+          } else {
+            price = priceData?.per_kilometer_charge * distance + priceData?.base_order_charges
+          }
         } else {
           if (mainDistance < 1.0) {
             price = priceData?.base_order_charges
           } else {
-            price = priceData?.per_kilometer_charge * mainDistance
+            price = priceData?.per_kilometer_charge * mainDistance + priceData?.base_order_charges
           }
         }
-        let finalAmount = formState.parcel_weight === weight[0] || formState.parcel_weight == weight[1] ? price : formState.parcel_weight === weight[2] ? price + 50 + priceData?.base_order_charges : formState.parcel_weight === weight[3] ? price + 100 + priceData?.base_order_charges : price + 150 + priceData?.base_order_charges
+        let finalAmount = formState.parcel_weight === weight[0] || formState.parcel_weight == weight[1] ? price : formState.parcel_weight === weight[2] ? price + 50 : formState.parcel_weight === weight[3] ? price + 100 : price + 150
         if (mainDistance == 0) {
           setAmount(0)
         } else {
@@ -716,6 +723,7 @@ const CreateOrder = () => {
             <p>If you have any questions, contact us by message or phone our operator. By selecting the 'Order' option, you will receive the Operator's phone number, save it together with the order number.</p>
             <p>Have your delivery done. Give the courier his signature directly on his smartphone's screen to confirm everything was done correctly. To assist us in selecting the very best couriers, you can evaluate a courier once the delivery is complete.</p>
             <p className='mt-3'>Many thanks, Team Instaport</p>
+            <p>Regards, MAHESH HARISH CHOROTIYA</p>
           </div>
 
           <a href={"#main"} ><Button type="button" text={"Scroll to top"} className={"my-4 py-3"} /></a>
@@ -737,6 +745,18 @@ const CreateOrder = () => {
                   <Input value={amount.toFixed(2)} label={"Amount"} onChange={() => { }} />
                 </div>
               </div>
+              {payment == "cod" && <div className='flex flex-col'>
+                <h2 className='text-lg text-left w-full font-bold mb-1'>Payment Address</h2>
+                <div className='flex flex-col gap-2'>
+                  <div onClick={() => { setPaymentAddress(pickup) }} className={paymentAddress?.key == pickup.key ?  'px-5 py-3 bg-white border-accentYellow border-2 rounded-lg' :  'px-5 py-3 bg-white border-2 rounded-lg'}>{pickup?.address}</div>
+                  <div onClick={() => { setPaymentAddress(drop) }} className={paymentAddress?.key == drop.key ?  'px-5 py-3 bg-white border-accentYellow border-2 rounded-lg' :  'px-5 py-3 bg-white border-2 rounded-lg'}>{drop?.address}</div>
+                  {
+                    droplocations.map((droppoint, index) => {
+                      return <div key={index} onClick={() => { setPaymentAddress(droppoint) }} className={paymentAddress?.key == droppoint?.key ?  'px-5 py-3 bg-white border-accentYellow border-2 rounded-lg' :  'px-5 py-3 bg-white border-2 rounded-lg'}>{droppoint?.address}</div>
+                    })
+                  }
+                </div>
+              </div>}
               <div className='w-[60%] m-auto flex justify-center gap-6' >
                 <button type='button' onClick={() => { setPayment("online") }} className={payment === "online" ? 'outline-none rounded-xl px-7 py-2 bg-accentYellow border-accentYellow border-2 hover:shadow-md duration-200 ' : 'outline-none rounded-xl px-7 py-2 border-accentYellow border-2 hover:shadow-md duration-200 '}>Online</button>
                 <button type='button' onClick={() => { setPayment("cod") }} className={payment === "cod" ? 'outline-none rounded-xl px-7 py-2 bg-accentYellow border-accentYellow border-2 hover:shadow-md duration-200 ' : 'outline-none rounded-xl px-7 py-2 border-accentYellow border-2 hover:shadow-md duration-200 '}>COD</button>
