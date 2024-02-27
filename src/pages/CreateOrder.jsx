@@ -71,7 +71,7 @@ const CreateOrder = () => {
   const [showNote, setShowNote] = useState(false);
 
   useEffect(() => {
-    if(localStorage.getItem("token") == "" || localStorage.getItem("token") == undefined || localStorage.getItem("token") == null){
+    if (localStorage.getItem("token") == "" || localStorage.getItem("token") == undefined || localStorage.getItem("token") == null) {
       alert("Please Login to your account!");
     }
     axios("https://instaport-backend-main.vercel.app/price/get", {
@@ -106,6 +106,7 @@ const CreateOrder = () => {
                 console.log(res.data)
               } else {
                 alert(res.data.message)
+                setShow(false)
                 setShowNote(true)
               }
             })
@@ -135,6 +136,7 @@ const CreateOrder = () => {
             console.log(res.data)
           } else {
             alert(res.data.message)
+            setShow(false)
             setShowNote(true)
           }
         })
