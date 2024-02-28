@@ -199,41 +199,19 @@ const CreateOrder = () => {
 
   const calculateDistance = async (source, destination) => {
     try {
-      let key = "AIzaSyCQb159dbqJypdIO1a1o0v_mNgM5eFqVAo"
-      let pickupEncoded = `${source.latitude},${source.longitude}`;
-      let dropEncoded = `${destination.latitude},${destination.longitude}`;
-      let url =
-        `https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${pickupEncoded}&origins=${dropEncoded}&key=${key}`;
-      const response = await axios(url)
-      const route = response.rows[0];
-      if (route && route.elements && route.legs.length > 0) {
-        return (route.elements[0].distance.value / 1000).toFixed(2);
-      } else {
-        return 0;
-      }
-      // const google = window.google;
-      // const directionsService = new google.maps.DirectionsService();
-      // let obj = await directionsService.route(
-      //   {
-      //     origin: { lat: source.latitude, lng: source.longitude },
-      //     destination: { lat: destination.latitude, lng: destination.longitude },
-      //     travelMode: google.maps.TravelMode.DRIVING,
-      //   },
-      //   (response, status) => {
-      //     if (status === 'OK') {
-      //       const route = response.routes[0];
-      //      
-      //     } else {
-      //       return 0;
-      //     }
-      //   }
-      // );
-      // return obj.routes[0].legs[0].distance.value / 1000;
+      let url = `https://instaport-backend-main.vercel.app/distance`;
+      const response = await axios(url, {
+        method: "POST",
+        data: {
+          source, destination
+        }
+      })
+        return response.data;
     } catch (error) {
       alert("Something went wrong! Try reloading the page!");
+      window.location.reload()
       return 0;
     }
-
   }
 
   const handleChange = (e) => {

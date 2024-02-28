@@ -15,42 +15,31 @@ const Home = () => {
 	const [calculationLoading, setCalculationLoading] = useState(false);
 	const [pricingData, setPricingData] = useState();
 
-	const calculateRate = () => {
+	const calculateRate = async () => {
 		try {
 			setCalculationLoading(true);
-			const google = window.google;
-
-			const directionsService = new google.maps.DirectionsService();
-
-			directionsService.route(
-				{
-					origin: { lat: pickupAddress.latitude, lng: pickupAddress.longitude },
-					destination: { lat: dropAddress.latitude, lng: dropAddress.longitude },
-					travelMode: google.maps.TravelMode.DRIVING,
-				},
-				(response, status) => {
-					if (status === 'OK') {
-						const route = response.routes[0];
-						if (route && route.legs && route.legs.length > 0) {
-							setDistance((route.legs[0].distance.value / 1000).toFixed(2));
-							axios("https://instaport-backend-main.vercel.app/price/get", {
-								method: "GET"
-							})
-								.then((res) => {
-									if (res.data.error) return
-									setPricingData(res.data?.priceManipulation)
-								})
-						}
-					} else {
-						alert('Directions request failed due to ' + status);
-					}
+			let url = `https://instaport-backend-main.vercel.app/distance`;
+			console.log(pickupAddress)
+			const response = await axios(url, {
+				method: "POST",
+				data: {
+					source: { latitude: pickupAddress.latitude, longitude: pickupAddress.longitude }, destination: { latitude: dropAddress.latitude, longitude: dropAddress.longitude }
 				}
-			);
+			})
+			setDistance((response.data).toFixed(2));
+			console.log((response.data).toFixed(2));
+			axios("https://instaport-backend-main.vercel.app/price/get", {
+				method: "GET"
+			})
+				.then((res) => {
+					if (res.data.error) return
+					setPricingData(res.data?.priceManipulation)
+				})
 			setCalculationLoading(false)
 		} catch (error) {
 			alert("Something went wrong! Try reloading the page!")
+			setCalculationLoading(false)
 		}
-
 	}
 	const addressInitialState = {
 		text: "",
@@ -229,7 +218,7 @@ const Home = () => {
 								<Button onClick={calculateRate} text={"Calculate"} />
 							</div>
 							{pricingData && <div className='flex justify-center'>
-								<div className='w-max mt-4 px-5 py-2 rounded-full border-2 border-accentYellow bg-white'>Fare: {(distance * Number(pricingData?.per_kilometer_charge)).toFixed(2)}Rs</div>
+								<div className='w-max mt-4 px-5 py-2 rounded-full border-2 border-accentYellow bg-white'>Fare: {(distance * Number(pricingData?.per_kilometer_charge) + Number(pricingData?.base_order_charges)).toFixed(2)}Rs</div>
 							</div>}
 						</div>
 					</div>
