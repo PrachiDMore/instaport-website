@@ -137,6 +137,7 @@ const CreateOrder = () => {
           if (res.data.error) {
             console.log(res.data)
           } else {
+            set(ref(db, 'orders/' + res.data.order._id), res.data.order);
             alert(res.data.message)
             setShow(false)
             setShowNote(true)
@@ -198,26 +199,36 @@ const CreateOrder = () => {
 
   const calculateDistance = async (source, destination) => {
     try {
-      const google = window.google;
-      const directionsService = new google.maps.DirectionsService();
-      let obj = await directionsService.route(
-        {
-          origin: { lat: source.latitude, lng: source.longitude },
-          destination: { lat: destination.latitude, lng: destination.longitude },
-          travelMode: google.maps.TravelMode.DRIVING,
-        },
-        (response, status) => {
-          if (status === 'OK') {
-            const route = response.routes[0];
-            if (route && route.legs && route.legs.length > 0) {
-              return (route.legs[0].distance.value / 1000).toFixed(2);
-            }
-          } else {
-            return 0;
-          }
-        }
-      );
-      return obj.routes[0].legs[0].distance.value / 1000;
+      let key = "AIzaSyCQb159dbqJypdIO1a1o0v_mNgM5eFqVAo"
+      let pickupEncoded = `${source.latitude},${source.longitude}`;
+      let dropEncoded = `${destination.latitude},${destination.longitude}`;
+      let url =
+        `https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${pickupEncoded}&origins=${dropEncoded}&key=${key}`;
+      const response = await axios(url)
+      const route = response.rows[0];
+      if (route && route.elements && route.legs.length > 0) {
+        return (route.elements[0].distance.value / 1000).toFixed(2);
+      } else {
+        return 0;
+      }
+      // const google = window.google;
+      // const directionsService = new google.maps.DirectionsService();
+      // let obj = await directionsService.route(
+      //   {
+      //     origin: { lat: source.latitude, lng: source.longitude },
+      //     destination: { lat: destination.latitude, lng: destination.longitude },
+      //     travelMode: google.maps.TravelMode.DRIVING,
+      //   },
+      //   (response, status) => {
+      //     if (status === 'OK') {
+      //       const route = response.routes[0];
+      //      
+      //     } else {
+      //       return 0;
+      //     }
+      //   }
+      // );
+      // return obj.routes[0].legs[0].distance.value / 1000;
     } catch (error) {
       alert("Something went wrong! Try reloading the page!");
       return 0;
@@ -265,6 +276,7 @@ const CreateOrder = () => {
             price = priceData?.per_kilometer_charge * distance + priceData?.base_order_charges
           }
         } else {
+          console.log(mainDistance)
           if (mainDistance < 1.0) {
             price = priceData?.base_order_charges
           } else {
@@ -748,11 +760,11 @@ const CreateOrder = () => {
               {payment == "cod" && <div className='flex flex-col'>
                 <h2 className='text-lg text-left w-full font-bold mb-1'>Payment Address</h2>
                 <div className='flex flex-col gap-2'>
-                  <div onClick={() => { setPaymentAddress(pickup) }} className={paymentAddress?.key == pickup.key ?  'px-5 py-3 bg-white border-accentYellow border-2 rounded-lg' :  'px-5 py-3 bg-white border-2 rounded-lg'}>{pickup?.address}</div>
-                  <div onClick={() => { setPaymentAddress(drop) }} className={paymentAddress?.key == drop.key ?  'px-5 py-3 bg-white border-accentYellow border-2 rounded-lg' :  'px-5 py-3 bg-white border-2 rounded-lg'}>{drop?.address}</div>
+                  <div onClick={() => { setPaymentAddress(pickup) }} className={paymentAddress?.key == pickup.key ? 'px-5 py-3 bg-white border-accentYellow border-2 rounded-lg' : 'px-5 py-3 bg-white border-2 rounded-lg'}>{pickup?.address}</div>
+                  <div onClick={() => { setPaymentAddress(drop) }} className={paymentAddress?.key == drop.key ? 'px-5 py-3 bg-white border-accentYellow border-2 rounded-lg' : 'px-5 py-3 bg-white border-2 rounded-lg'}>{drop?.address}</div>
                   {
                     droplocations.map((droppoint, index) => {
-                      return <div key={index} onClick={() => { setPaymentAddress(droppoint) }} className={paymentAddress?.key == droppoint?.key ?  'px-5 py-3 bg-white border-accentYellow border-2 rounded-lg' :  'px-5 py-3 bg-white border-2 rounded-lg'}>{droppoint?.address}</div>
+                      return <div key={index} onClick={() => { setPaymentAddress(droppoint) }} className={paymentAddress?.key == droppoint?.key ? 'px-5 py-3 bg-white border-accentYellow border-2 rounded-lg' : 'px-5 py-3 bg-white border-2 rounded-lg'}>{droppoint?.address}</div>
                     })
                   }
                 </div>
