@@ -70,6 +70,7 @@ const CreateOrder = () => {
   const [droplocations, setDroplocations] = useState([]);
   const [amount, setAmount] = useState(0.0);
   const [showNote, setShowNote] = useState(false);
+  const [distances, setDistances] = useState([])
 
   useEffect(() => {
     if (localStorage.getItem("token") == "" || localStorage.getItem("token") == undefined || localStorage.getItem("token") == null) {
@@ -97,7 +98,7 @@ const CreateOrder = () => {
         .then((res) => {
           axios("https://instaport-backend-main.vercel.app/order/create", {
             method: "POST",
-            data: { ...formState, pickup: pickup, drop: drop, amount: res.data.transaction.amount, payment_method: res.data.transaction.payment_method_type, status: "new", droplocations: droplocations, commission: priceData?.instaport_commission, payment_address: paymentAddress },
+            data: { ...formState, pickup: pickup, drop: drop, amount: res.data.transaction.amount, payment_method: res.data.transaction.payment_method_type, status: "new", droplocations: droplocations, commission: priceData?.instaport_commission, payment_address: paymentAddress, distances: distances },
             headers: {
               "Authorization": `Bearer ${localStorage.getItem("token")}`
             }
@@ -128,7 +129,7 @@ const CreateOrder = () => {
     if (payment === "cod") {
       axios("https://instaport-backend-main.vercel.app/order/create", {
         method: "POST",
-        data: { ...formState, pickup: pickup, drop: drop, amount: amount, payment_method: "cod", status: "new", droplocations: droplocations, commission: priceData?.instaport_commission, payment_address: paymentAddress },
+        data: { ...formState, pickup: pickup, drop: drop, amount: amount, payment_method: "cod", status: "new", droplocations: droplocations, commission: priceData?.instaport_commission, payment_address: paymentAddress, distances: distances },
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
@@ -206,7 +207,7 @@ const CreateOrder = () => {
           source, destination
         }
       })
-        return response.data;
+      return response.data;
     } catch (error) {
       alert("Something went wrong! Try reloading the page!");
       window.location.reload()
@@ -228,10 +229,12 @@ const CreateOrder = () => {
   }
 
   const fetchDistanceAndCost = () => {
+    let distArr = []
     axios("https://instaport-backend-main.vercel.app/price/get")
       .then(async (res) => {
         let priceData = res.data?.priceManipulation;
         const mainDistance = await calculateDistance(pickup, drop);
+        distArr.push(mainDistance);
         let distance = 0;
         let price = 0;
         if (droplocations.length != 0) {
@@ -240,10 +243,12 @@ const CreateOrder = () => {
             const element = droplocations[index];
             if (index == 0) {
               let gap = await calculateDistance(drop, element)
+              distArr.push(gap);
               distance += gap;
               price += gap * priceData.additional_per_kilometer_charge
             } else {
               let gap = await calculateDistance(droplocations[index - 1], element)
+              distArr.push(gap);
               distance += gap;
               price += gap * priceData.additional_per_kilometer_charge
             }
@@ -254,7 +259,6 @@ const CreateOrder = () => {
             price = priceData?.per_kilometer_charge * distance + priceData?.base_order_charges
           }
         } else {
-          console.log(mainDistance)
           if (mainDistance < 1.0) {
             price = priceData?.base_order_charges
           } else {
@@ -267,6 +271,8 @@ const CreateOrder = () => {
         } else {
           setAmount(finalAmount)
         }
+        console.log(distArr)
+        setDistances(distArr)
       })
   }
 
