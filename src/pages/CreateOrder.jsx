@@ -235,22 +235,19 @@ const CreateOrder = () => {
         let priceData = res.data?.priceManipulation;
         const mainDistance = await calculateDistance(pickup, drop);
         distArr.push(mainDistance);
-        let distance = 0;
+        let distance = mainDistance;
         let price = 0;
         if (droplocations.length != 0) {
-          price = mainDistance * priceData?.per_kilometer_charge;
           for (let index = 0; index < droplocations.length; index++) {
             const element = droplocations[index];
             if (index == 0) {
               let gap = await calculateDistance(drop, element)
               distArr.push(gap);
               distance += gap;
-              price += gap * priceData.additional_per_kilometer_charge
             } else {
               let gap = await calculateDistance(droplocations[index - 1], element)
               distArr.push(gap);
               distance += gap;
-              price += gap * priceData.additional_per_kilometer_charge
             }
           }
           if (distance < 1.0) {
@@ -271,7 +268,6 @@ const CreateOrder = () => {
         } else {
           setAmount(finalAmount)
         }
-        console.log(distArr)
         setDistances(distArr)
       })
   }
