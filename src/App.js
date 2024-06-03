@@ -10,6 +10,7 @@ import CancellationAndRefund from './pages/CancellationAndRefund';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TopUp from './pages/TopUp';
 import Signin from './components/Signin';
+import PrivacyPolicyRider from './pages/PrivacyPolicyRider';
 
 function App() {
   return (
@@ -21,9 +22,10 @@ function App() {
           <Route path="/create-order" element={<CreateOrder />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/rider-privacy-policy" element={<PrivacyPolicyRider />} />
           <Route path="/cancellation-and-refund" element={<CancellationAndRefund />} />
           <Route path="/terms-and-conditions/customer" element={<TermsAndConditions />} />
-          <Route path="/terms-and-conditions/rider" element={<TermsAndConditionsRider />} />
+          {/* <Route path="/terms-and-conditions/rider" element={<TermsAndConditionsRider />} /> */}
           <Route path="/topup/:token" element={<TopUp />} />
         </Routes>
       </Router>
