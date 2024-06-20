@@ -25,7 +25,7 @@ function App() {
           <Route path="/rider-privacy-policy" element={<PrivacyPolicyRider />} />
           <Route path="/cancellation-and-refund" element={<CancellationAndRefund />} />
           <Route path="/terms-and-conditions/customer" element={<TermsAndConditions />} />
-          {/* <Route path="/terms-and-conditions/rider" element={<TermsAndConditionsRider />} /> */}
+          <Route path="/terms-and-conditions/rider" element={<TermsAndConditionsRider />} />
           <Route path="/topup/:token" element={<TopUp />} />
         </Routes>
       </Router>

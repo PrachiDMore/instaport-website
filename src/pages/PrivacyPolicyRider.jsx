@@ -17,6 +17,13 @@ const PrivacyPolicyRider = () => {
           <p className='pb-2'>By using the Services, you consent to the following terms: you will only access the Services through channels specifically approved by Instaport Delivery; the platform and Services will be used exclusively by you for your own use only, with no intention of reselling to others Your INSTAPORT DELIVERY EXECUTIVE Partner Account will not be accessible to third parties One INSTAPORT DELIVERY EXECUTIVE Partner Account may only be opened by you;</p>
           <p className='pb-2'>From time to time, Instaport may update this page with new policies.</p>
 
+          <h1 className='text-xl font-semibold mt-4 self-start'>PERMISSIONS</h1>
+          <p className='pb-2'>The access of location is mandatory while using the Instaport delivery application, on the basis that you will be getting the third party details within that radiation.</p>
+          <p className='pb-2'>The day when the partners id is created and once they login in the portal the access of location will start in the foreground till the time you logout from the portal. </p>
+          <p className='pb-2'>The partners will be guided by the Google mapping system they need to give access through the device</p>
+          <p className='pb-2'>While logging in the application the partner needs to allow and provide the access to the application as per the requirement. This will lead to the sharing of the personal data to where the person consenting to the disclosure is aware of the confidentiality of the records, the reason the agency is seeking the information, and what use the agency will make of the information.</p>
+          
+          
           <h1 className='text-xl font-semibold mt-4 self-start'>CONTACT WITH US</h1>
           <p className='pb-2'>You can use the details on the support page to get in touch with us if you have any concerns about this privacy statement or if you want to report a violation of it.</p>
 
