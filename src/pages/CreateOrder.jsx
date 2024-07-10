@@ -1,22 +1,19 @@
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import { FiCalendar, FiTrash, FiTrash2 } from 'react-icons/fi'
+import { FiCalendar, FiTrash2 } from 'react-icons/fi'
 import { LuClock3 } from 'react-icons/lu'
 import Input from '../components/Input'
-import { IoIosArrowDown, IoIosClose } from 'react-icons/io'
+import {IoIosClose } from 'react-icons/io'
 import Button from '../components/Button'
 import { useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import {
   geocodeByAddress,
-  geocodeByPlaceId,
   getLatLng,
 } from 'react-places-autocomplete';
 import PlacesAutocomplete from 'react-places-autocomplete';
-import { useRef } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import { ref, set } from "firebase/database";
 import { db } from "../config";
 
@@ -65,12 +62,25 @@ const CreateOrder = () => {
   }
   const [formState, setFormState] = useState(initialFormState)
   const [priceData, setPriceData] = useState();
-  const [distance, setDistance] = useState(0);
   const [payment, setPayment] = useState("cod")
   const [droplocations, setDroplocations] = useState([]);
   const [amount, setAmount] = useState(0.0);
   const [showNote, setShowNote] = useState(false);
   const [distances, setDistances] = useState([])
+
+  useEffect(() => {
+    const inputs = document.querySelectorAll('#orderForm input');
+    inputs.forEach(input => {
+      input.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+        }
+      });
+    });
+    return () => {
+      
+    };
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem("token") == "" || localStorage.getItem("token") == undefined || localStorage.getItem("token") == null) {
@@ -124,6 +134,10 @@ const CreateOrder = () => {
   }
 
   const handlePayment = () => {
+    if (localStorage.getItem("token") == "" || localStorage.getItem("token") == undefined || localStorage.getItem("token") == null) {
+      alert("Please Login to your account!");
+      return;
+    }
     let ip = "";
     fetchDistanceAndCost();
     if (payment === "cod") {
@@ -287,7 +301,11 @@ const CreateOrder = () => {
     <>
       <section id='main' className='h-auto w-screen Poppins flex flex-col bg-[#fafae0]'>
         <Navbar />
-        <div className='h-auto w-screen flex flex-col items-center lg:px-24 px-5 lg:text-left text-center relative'>
+        <form id='orderForm' onSubmit={(e) => {
+          e.preventDefault();
+          setShow(true); 
+          fetchDistanceAndCost();
+        }} className='h-auto w-screen flex flex-col items-center lg:px-24 px-5 lg:text-left text-center relative'>
           <div className='w-full flex lg:justify-start justify-center'>
             <h1 className='text-3xl md:text-5xl pt-36 font-semibold mb-3 self-start lg:text-left text-center'>Create an Order</h1>
           </div>
@@ -358,6 +376,7 @@ const CreateOrder = () => {
                 {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                   <div className='relative w-full'>
                     <input
+                    required={true}
                       {...getInputProps({
                         placeholder: 'Pick your pickup address',
                         className: 'w-full location-search-input outline-none rounded-xl px-7 py-3 border-accentYellow border-2 w-full',
@@ -389,21 +408,21 @@ const CreateOrder = () => {
                 )}
               </PlacesAutocomplete>
             </div>
-            <Input onChange={(e) => { setPickup({ ...pickup, address: e.target.value }) }} value={pickup.address} label={"Address"} type={"text"} placeholder={"Enter your address"} id={"address"} />
+            <Input required={true} onChange={(e) => { setPickup({ ...pickup, address: e.target.value }) }} value={pickup.address} label={"Address"} type={"text"} placeholder={"Enter your address"} id={"address"} />
             <div className='grid lg:grid-cols-2 gap-4'>
-              <Input onChange={(e) => { setPickup({ ...pickup, building_and_flat: e.target.value }) }} value={pickup.building_and_flat} label={"Building / Flat"} type={"text"} placeholder={"Enter your Building / Flat"} id={"building_and_flat"} />
-              <Input onChange={(e) => { setPickup({ ...pickup, floor_and_wing: e.target.value }) }} value={pickup.floor_and_wing} label={"Floor / Wing"} type={"text"} placeholder={"Enter your Floor / Wing"} id={"floor_and_wing"} />
+              <Input required={true} onChange={(e) => { setPickup({ ...pickup, building_and_flat: e.target.value }) }} value={pickup.building_and_flat} label={"Building / Flat"} type={"text"} placeholder={"Enter your Building / Flat"} id={"building_and_flat"} />
+              <Input required={true} onChange={(e) => { setPickup({ ...pickup, floor_and_wing: e.target.value }) }} value={pickup.floor_and_wing} label={"Floor / Wing"} type={"text"} placeholder={"Enter your Floor / Wing"} id={"floor_and_wing"} />
             </div>
             <div className={formState.delivery_type == "scheduled" ? 'grid lg:grid-cols-2 gap-4' : "hidden"}>
-              <Input onChange={(e) => { setPickup({ ...pickup, date: e.target.value }) }} value={pickup.date} label={"Date"} type={"date"} placeholder={"Enter your Date"} id={"date"} />
-              <Input onChange={(e) => { setPickup({ ...pickup, time: e.target.value }) }} value={pickup.time} label={"Time"} type={"time"} placeholder={"Enter your Time"} id={"time"} />
+              <Input required={formState.delivery_type != "now"} onChange={(e) => { setPickup({ ...pickup, date: e.target.value }) }} value={pickup.date} label={"Date"} type={"date"} placeholder={"Enter your Date"} id={"date"} />
+              <Input required={formState.delivery_type != "now"} onChange={(e) => { setPickup({ ...pickup, time: e.target.value }) }} value={pickup.time} label={"Time"} type={"time"} placeholder={"Enter your Time"} id={"time"} />
             </div>
             <div className='grid lg:grid-cols-2 gap-4'>
-              <Input onChange={(e) => {
+              <Input required={true} onChange={(e) => {
                 let text = formatPhoneNumber(e.target.value)
                 setPickup({ ...pickup, phone_number: text })
               }} value={pickup.phone_number} label={"Mobile Number"} type={"text"} placeholder={"Enter your 10 digit mobile number"} id={"phone_number"} />
-              <Input onChange={(e) => { setPickup({ ...pickup, name: e.target.value }) }} value={pickup.name} label={"Name"} type={"text"} placeholder={"Enter your name"} id={"name"} />
+              <Input required={true} onChange={(e) => { setPickup({ ...pickup, name: e.target.value }) }} value={pickup.name} label={"Name"} type={"text"} placeholder={"Enter your name"} id={"name"} />
             </div>
             <Input onChange={(e) => { setPickup({ ...pickup, instructions: e.target.value }) }} value={pickup.instructions} label={"Instructions"} type={"text"} placeholder={"Instructions"} id={"instructions"} />
           </div>
@@ -439,6 +458,7 @@ const CreateOrder = () => {
                 {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                   <div className='relative w-full '>
                     <input
+                    required={true}
                       {...getInputProps({
                         placeholder: 'Pick your drop address',
                         className: 'w-full location-search-input outline-none rounded-xl px-7 py-3 border-accentYellow border-2 w-full',
@@ -469,21 +489,21 @@ const CreateOrder = () => {
                 )}
               </PlacesAutocomplete>
             </div>
-            <Input onChange={(e) => { setDrop({ ...drop, address: e.target.value }) }} value={drop.address} label={"Address"} type={"text"} placeholder={"Enter your address"} id={"address"} />
+            <Input required={true} onChange={(e) => { setDrop({ ...drop, address: e.target.value }) }} value={drop.address} label={"Address"} type={"text"} placeholder={"Enter your address"} id={"address"} />
             <div className='grid lg:grid-cols-2 gap-4'>
-              <Input onChange={(e) => { setDrop({ ...drop, building_and_flat: e.target.value }) }} value={drop.building_and_flat} label={"Building / Flat"} type={"text"} placeholder={"Enter your Building / Flat"} id={"building_and_flat"} />
-              <Input onChange={(e) => { setDrop({ ...drop, floor_and_wing: e.target.value }) }} value={drop.floor_and_wing} label={"Floor / Wing"} type={"text"} placeholder={"Enter your Floor / Wing"} id={"floor_and_wing"} />
+              <Input required={true} onChange={(e) => { setDrop({ ...drop, building_and_flat: e.target.value }) }} value={drop.building_and_flat} label={"Building / Flat"} type={"text"} placeholder={"Enter your Building / Flat"} id={"building_and_flat"} />
+              <Input required={true} onChange={(e) => { setDrop({ ...drop, floor_and_wing: e.target.value }) }} value={drop.floor_and_wing} label={"Floor / Wing"} type={"text"} placeholder={"Enter your Floor / Wing"} id={"floor_and_wing"} />
             </div>
             <div className={formState.delivery_type == "scheduled" ? 'grid lg:grid-cols-2 gap-4' : "hidden"}>
-              <Input onChange={(e) => { setDrop({ ...drop, date: e.target.value }) }} value={drop.date} label={"Date"} type={"date"} placeholder={"Enter your Date"} id={"date"} />
-              <Input onChange={(e) => { setDrop({ ...drop, time: e.target.value }) }} value={drop.time} label={"Time"} type={"time"} placeholder={"Enter your Time"} id={"time"} />
+              <Input required={formState.delivery_type != "now"} onChange={(e) => { setDrop({ ...drop, date: e.target.value }) }} value={drop.date} label={"Date"} type={"date"} placeholder={"Enter your Date"} id={"date"} />
+              <Input required={formState.delivery_type != "now"} onChange={(e) => { setDrop({ ...drop, time: e.target.value }) }} value={drop.time} label={"Time"} type={"time"} placeholder={"Enter your Time"} id={"time"} />
             </div>
             <div className='grid lg:grid-cols-2 gap-4'>
-              <Input onChange={(e) => {
+              <Input required={true} onChange={(e) => {
                 let text = formatPhoneNumber(e.target.value)
                 setDrop({ ...drop, phone_number: text })
               }} value={drop.phone_number} label={"Mobile Number"} type={"text"} placeholder={"Enter your 10 digit mobile number"} id={"phone_number"} />
-              <Input onChange={(e) => { setDrop({ ...drop, name: e.target.value }) }} value={drop.name} label={"Name"} type={"text"} placeholder={"Enter your name"} id={"name"} />
+              <Input required={true} onChange={(e) => { setDrop({ ...drop, name: e.target.value }) }} value={drop.name} label={"Name"} type={"text"} placeholder={"Enter your name"} id={"name"} />
             </div>
             <Input onChange={(e) => { setDrop({ ...drop, instructions: e.target.value }) }} value={drop.instructions} label={"Instructions"} type={"text"} placeholder={"Instructions"} id={"instructions"} />
           </div>
@@ -539,6 +559,7 @@ const CreateOrder = () => {
                     {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                       <div className='relative w-full '>
                         <input
+                        required={true}
                           {...getInputProps({
                             placeholder: 'Pick your drop address',
                             className: 'w-full location-search-input outline-none rounded-xl px-7 py-3 border-accentYellow border-2 w-full',
@@ -569,7 +590,7 @@ const CreateOrder = () => {
                     )}
                   </PlacesAutocomplete>
                 </div>
-                <Input onChange={(e) => {
+                <Input required={true} onChange={(e) => {
                   let obj = { ...droplocations[index] }
                   obj.address = e.target.value
                   let arr = [...droplocations];
@@ -577,14 +598,14 @@ const CreateOrder = () => {
                   setDroplocations(arr);
                 }} value={droplocation?.address} label={"Address"} type={"text"} placeholder={"Enter your address"} id={"address"} />
                 <div className='grid lg:grid-cols-2 gap-4'>
-                  <Input onChange={(e) => {
+                  <Input required={true} onChange={(e) => {
                     let obj = { ...droplocations[index] }
                     obj.building_and_flat = e.target.value
                     let arr = [...droplocations];
                     arr[index] = obj;
                     setDroplocations(arr);
                   }} value={droplocation?.building_and_flat} label={"Building / Flat"} type={"text"} placeholder={"Enter your Building / Flat"} id={"building_and_flat"} />
-                  <Input onChange={(e) => {
+                  <Input required={true} onChange={(e) => {
                     let obj = { ...droplocations[index] }
                     obj.floor_and_wing = e.target.value
                     let arr = [...droplocations];
@@ -593,14 +614,14 @@ const CreateOrder = () => {
                   }} value={droplocation?.floor_and_wing} label={"Floor / Wing"} type={"text"} placeholder={"Enter your Floor / Wing"} id={"floor_and_wing"} />
                 </div>
                 <div className={formState.delivery_type == "scheduled" ? 'grid lg:grid-cols-2 gap-4' : "hidden"}>
-                  <Input onChange={(e) => {
+                  <Input required={formState.delivery_type != "now"} onChange={(e) => {
                     let obj = { ...droplocations[index] }
                     obj.date = e.target.value
                     let arr = [...droplocations];
                     arr[index] = obj;
                     setDroplocations(arr);
                   }} value={droplocation?.date} label={"Date"} type={"date"} placeholder={"Enter your Date"} id={"date"} />
-                  <Input onChange={(e) => {
+                  <Input required={formState.delivery_type != "now"} onChange={(e) => {
                     let obj = { ...droplocations[index] }
                     obj.time = e.target.value
                     let arr = [...droplocations];
@@ -609,7 +630,7 @@ const CreateOrder = () => {
                   }} value={droplocation?.time} label={"Time"} type={"time"} placeholder={"Enter your Time"} id={"time"} />
                 </div>
                 <div className='grid lg:grid-cols-2 gap-4'>
-                  <Input onChange={(e) => {
+                  <Input required={true} onChange={(e) => {
                     let obj = { ...droplocations[index] }
                     let text = formatPhoneNumber(e.target.value)
                     obj.phone_number = text
@@ -617,7 +638,7 @@ const CreateOrder = () => {
                     arr[index] = obj;
                     setDroplocations(arr);
                   }} value={droplocation?.phone_number} label={"Mobile Number"} type={"text"} placeholder={"Enter your 10 digit mobile number"} id={"phone_number"} />
-                  <Input onChange={(e) => {
+                  <Input required={true} onChange={(e) => {
                     let obj = { ...droplocations[index] }
                     obj.name = e.target.value
                     let arr = [...droplocations];
@@ -644,17 +665,18 @@ const CreateOrder = () => {
           {/* sixth box */}
           <div className='border-accentYellow border-2 bg-white w-full lg:w-[80%] h-auto flex flex-col gap-6 my-4 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
             <h1 className='text-xl'>What Commodity are you Sending?</h1>
-            <Input onChange={handleChange} value={formState.package} type={"text"} placeholder={"Cake, Fruits, Clothes, Documents, Flowers, vegetables,etc"} id={"package"} />
+            <Input required={true} onChange={handleChange} value={formState.package} type={"text"} placeholder={"Cake, Fruits, Clothes, Documents, Flowers, vegetables,etc"} id={"package"} />
           </div>
 
           {/* seventh box */}
           <div className='border-accentYellow border-2 bg-white lg:w-[80%] w-full h-auto flex flex-col gap-6 my-4 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
             <h1 className='text-xl'>Insurance of Parcel</h1>
             <div className='flex flex-col w-full gap-3 items-end'>
-              <Input onChange={handleChange} value={formState.parcel_value} label={"Parcel Value"} type={"number"} placeholder={"Enter the cost of the parcel"} id={"parcel_value"} />
+              <Input required={true} onChange={handleChange} value={formState.parcel_value} label={"Parcel Value"} type={"number"} placeholder={"Enter the cost of the parcel"} id={"parcel_value"} />
               <p className='w-full'>Rs - 100 Additional insurance charges applied</p>
             </div>
-            <Input onChange={(e) => {
+            <Input required={true} onChange={(e) => {
+              
               let text = formatPhoneNumber(e.target.value)
               setFormState({
                 ...formState,
@@ -702,7 +724,7 @@ const CreateOrder = () => {
             {/* <span className='absolute right-10 top-5 text-lg'><IoIosArrowDown /></span> */}
           </div>
 
-          <Button onClick={() => { setShow(true); fetchDistanceAndCost() }} type="button" text={"Place Order"} className={"mt-14 mb-6 py-3"} />
+          <Button type="submit" text={"Place Order"} className={"mt-14 mb-6 py-3"} />
           {/* <Button onClick={() => { setShow(true); fetchDistanceAndCost() }} type="button" text={"Place Order"} className={"mt-14 mb-6 py-3"} /> */}
 
           <div className='border-accentYellow border-2 bg-white lg:w-[80%] w-full h-auto flex flex-col lg:text-center text-left my-4 gap-2 lg:py-8 py-4 lg:px-10 px-4 rounded-2xl'>
@@ -756,7 +778,7 @@ const CreateOrder = () => {
               <div className='flex justify-center items-center'><Button type="button" onClick={handlePayment} text={"Place Order"} className={"mx-auto"} /></div>
             </div>
           </section>
-        </div>
+        </form>
         <Footer />
 
         <div className={showNote ? 'fixed top-0 left-0 h-screen w-screen flex items-center justify-center z-[60] bg-black/40 opacity-100 duration-100 pointer-events-auto' : 'duration-100 pointer-events-none opacity-0 fixed top-0 left-0 h-screen w-screen flex items-center justify-center z-[60] bg-black/40'}>
