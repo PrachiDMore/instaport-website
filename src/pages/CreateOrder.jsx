@@ -180,7 +180,7 @@ const CreateOrder = () => {
       })
         .then((res) => {
           var flow_config = {
-            merchantId: "UATINSPTV2",
+            merchantId: "INSTAPRTV2",
             bdOrderId: res.data.bdorderid,
             authToken: res.data.authorization,
             childWindow: true,
