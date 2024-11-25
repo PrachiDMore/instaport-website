@@ -94,6 +94,17 @@ const PrivacyPolicy = () => {
           <p className='pb-2'><span className='font-medium'>Time:</span> Monday to Friday (10 a.m. to 6 p.m.)</p>
           <p className='pb-2'><span className='font-medium'>Email id :</span> instaportdelivery@gmail.com</p>
 
+
+          <h1 className='text-xl font-semibold mt-4 self-start'>How to delete an account?</h1>
+          <p className='pb-2'><span className='font-medium'>Step-1:</span>Click on <a className='underline text-accentYellow' href='https://forms.gle/XqvYycyVFWFZQoDL7' target='_blank'>"DELETE ACCOUNT"</a></p>
+          <p className='pb-2'><span className='font-medium'>Step-2:</span>You need to enter your registered mobile number </p>
+          <p className='pb-2'><span className='font-medium'>Step-3:</span>Provide the reason (optional) </p>
+          <p className='pb-2'>Your request will be generated </p>
+          <p className='pb-2'>Within 1 to 2 business working days your account will be deactivated and your data will be cleared from the Instaport's end.</p>
+          <p className='pb-2'>This means we respect your data and as you register for the deactivation your personal data will be erased permanently.</p>
+          <p className='pb-2'>We also ensure that anyone's personal data will not be misused Instaport.</p>
+
+
         </section>
       </div>
       <Footer />
